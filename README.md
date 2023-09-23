@@ -1,5 +1,5 @@
-# EP_Merch
-Aplikasi berbasis Web ini merupakan sarana untuk mempermudah Divisi Elektropreneur serta pembeli dalam melakukan proses jual beli merchandise.
+# TeamUP
+Aplikasi berbasis Web yang membantu membuat serta mencari tim untuk mengikuti sebuah perlombaan.
 
 Anggota kelompok:
 1. Mochammad Novaldy Pratama Hakim (20/463606/TK/51598)
