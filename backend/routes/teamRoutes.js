@@ -1,6 +1,6 @@
 const express = require('express');
 const Team = require('../models/teamModel');
-const { getAllTeams, getTeam, createTeam, deleteTeam } = require('../controllers/teamController');
+const { getAllTeams, getTeam, createTeam, deleteTeam, acceptMember } = require('../controllers/teamController');
 
 const router = express.Router();
 
@@ -20,5 +20,7 @@ router.delete('/:id', deleteTeam);
 
 // POST a new team
 router.post('/', createTeam);
+
+router.patch('/position/:id', acceptMember);
 
 module.exports = router;
