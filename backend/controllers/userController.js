@@ -62,11 +62,13 @@ const updateUser = async (req, res) => {
         }
     );
 
+    const updatedUser = await User.findById(id);
+
     if (!user) {
         return res.status(404).json({ error: "User doesn't exist" });
     }
 
-    res.status(200).json(User.findById(id));
+    res.status(200).json(updatedUser);
 };
 
 module.exports = {

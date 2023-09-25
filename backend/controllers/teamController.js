@@ -16,6 +16,7 @@ const getTeam = async (req, res) => {
     }
 
     const team = await Team.findById(id, 'teamName teamLeader teamLocation teamStart teamEnd teamCompetition teamDescription teamMember');
+    res.status(200).json({ team });
 };
 
 // Create new team
@@ -41,10 +42,10 @@ const deleteTeam = async (req, res) => {
     const team = await Team.findOneAndDelete({ _id: id });
 
     if (!team) {
-        return res.status(404).json({ error: "User doesn't exist" });
+        return res.status(404).json({ error: "Team doesn't exist" });
     }
 
-    res.status(200).json(user);
+    res.status(200).json(team);
 };
 
 module.exports = {
