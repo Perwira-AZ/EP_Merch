@@ -1,6 +1,6 @@
 # TeamUP
 <p align="center">
-<img src="https://tenor.com/brO9y.gif" width="100%" height="100%">
+<img src="https://media.tenor.com/02ILjyFVXWQAAAAC/handshake.gif" width="100%" height="100%">
 </p>
 
 ## 📌About TeamUp
