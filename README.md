@@ -4,7 +4,7 @@
 </p>
 
 ## 📌About TeamUp
-Aplikasi berbasis Web yang membantu membuat serta mencari tim untuk mengikuti sebuah perlombaan.
+Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengikuti sebuah perlombaan.
 
 ## 👩‍💻Meet Our Team
 1. Mochammad Novaldy Pratama Hakim (20/463606/TK/51598)

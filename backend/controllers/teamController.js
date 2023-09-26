@@ -4,19 +4,27 @@ const mongoose = require('mongoose');
 // Get all team
 const getAllTeams = async (req, res) => {
     const teams = await Team.find({});
-
     res.status(200).json(teams);
 };
 
-// Get a singel team
+// Get a single team
 const getTeam = async (req, res) => {
     const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "Team doesn't exist" });
-    }
 
-    const team = await Team.findById(id, 'teamName teamLeader teamLocation teamStart teamEnd teamCompetition teamDescription teamMember');
-    res.status(200).json({ team });
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new Error("Team doesn't exist");
+        }
+    
+        const team = await Team.findById(id, 'teamName teamLeader teamLocation teamStart teamEnd teamCompetition teamDescription teamMember');
+        if (!team) {
+            throw new Error("Team doesn't exist");
+        }
+
+        res.status(200).json({ team });
+    } catch (error) {
+        res.status(404).json({ error: err.message() });
+    }
 };
 
 // Create new team
@@ -27,7 +35,7 @@ const createTeam = async (req, res) => {
         const team = await Team.create({ teamName, teamLeader, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember });
         res.status(200).json(team);
     } catch (err) {
-        res.status(400).json({ error: err.message });
+        res.status(400).json({ error: err.message() });
     }
 };
 
@@ -35,41 +43,51 @@ const createTeam = async (req, res) => {
 const deleteTeam = async (req, res) => {
     const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "Team doesn't exist" });
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new Error("Team doesn't exist");
+        }
+    
+        const team = await Team.findOneAndDelete({ _id: id });
+        if (!team) {
+            throw new Error("Team doesn't exist");
+        }
+    
+        res.status(200).json(team);
+    } catch (error) {
+        res.status(404).json({ error: err.message() });
     }
 
-    const team = await Team.findOneAndDelete({ _id: id });
-
-    if (!team) {
-        return res.status(404).json({ error: "Team doesn't exist" });
-    }
-
-    res.status(200).json(team);
 };
 
+// Accept a team member
 const acceptMember = async (req, res) => {
     const { id } = req.params;
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "Position doesn't exist" });
-    }
 
-    const acceptTeamMember = await Team.findOneAndUpdate(
-        { 'teamMember._id': id },
-        {
-            $set: {
-                'teamMember.$.member': req.body.member,
-            },
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new Error("Position doesn't exist");
         }
-    );
-
-    const updatedTeamMember = await Team.find({ 'teamMember._id': id });
-
-    if (!acceptTeamMember) {
-        return res.status(404).json({ error: "Position doesn't exist" });
+    
+        const acceptTeamMember = await Team.findOneAndUpdate(
+            { 'teamMember._id': id },
+            {
+                $set: {
+                    'teamMember.$.member': req.body.member,
+                },
+            }
+        );
+    
+        const updatedTeamMember = await Team.find({ 'teamMember._id': id });
+        if (!acceptTeamMember) {
+            throw new Error("Position doesn't exist");
+        }
+    
+        res.status(200).json(updatedTeamMember);
+    } catch (error) {
+        res.status(404).json({ error: err.message() });
     }
-
-    res.status(200).json(updatedTeamMember);
+    
 };
 
 module.exports = {
