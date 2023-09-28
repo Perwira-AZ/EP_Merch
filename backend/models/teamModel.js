@@ -43,16 +43,25 @@ const teamSchema = new Schema({
             member: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User',
-                unique: true,
             },
         },
     ],
     teamRequest: [
         {
-            position: String,
+            position: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Team.teamMember',
+                required: true,
+            },
             member: {
                 type: mongoose.Schema.Types.ObjectId,
                 ref: 'User',
+                required: true,
+            },
+            status: {
+                type: String,
+                default: 'Requesting',
+                required: true,
             },
         },
     ],
