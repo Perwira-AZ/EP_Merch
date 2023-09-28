@@ -63,11 +63,17 @@ const createTeam = async (req, res) => {
 
 // Delete a team
 const deleteTeam = async (req, res) => {
+    const user = req.user._id;
     const { id } = req.params;
 
     try {
         if (!mongoose.Types.ObjectId.isValid(id)) {
             throw new Error("Team doesn't exist");
+        }
+
+        const leader = await Team.findById(id, 'teamLeader');
+        if (leader.teamLeader.toString() !== user.toString()) {
+            throw new Error("You don't have access to delete team");
         }
 
         const team = await Team.findOneAndDelete({ _id: id });
@@ -76,8 +82,8 @@ const deleteTeam = async (req, res) => {
         }
 
         res.status(200).json(team);
-    } catch (error) {
-        res.status(400).json({ error: err.message() });
+    } catch (err) {
+        res.status(400).json({ error: err.message });
     }
 };
 
