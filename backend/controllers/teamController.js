@@ -2,9 +2,11 @@ const Team = require('../models/teamModel');
 const mongoose = require('mongoose');
 
 // Get all team
-const getAllTeams = async (req, res) => {
+const searchTeams = async (req, res) => {
+    const filter = req.body;
+    console.log(filter);
     try {
-        const teams = await Team.find({});
+        const teams = await Team.find(filter);
         res.status(200).json(teams);
     } catch (err) {
         res.status(400).json({ error: err.message });
@@ -170,7 +172,7 @@ const rejectMember = async (req, res) => {
 };
 
 module.exports = {
-    getAllTeams,
+    searchTeams,
     getTeam,
     getMyTeams,
     createTeam,

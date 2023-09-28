@@ -1,11 +1,11 @@
 const express = require('express');
-const { getAllTeams, getTeam, getMyTeams, createTeam, deleteTeam, createRequest, acceptMember, rejectMember } = require('../controllers/teamController');
+const { searchTeams, getTeam, getMyTeams, createTeam, deleteTeam, createRequest, acceptMember, rejectMember } = require('../controllers/teamController');
 const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 
 // GET all teams
-router.get('/', getAllTeams);
+router.get('/', searchTeams);
 
 // GET a single team
 router.get('/teamDetail/:id', getTeam);
