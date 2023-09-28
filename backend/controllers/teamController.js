@@ -37,7 +37,6 @@ const getMyTeams = async (req, res) => {
 
     try {
         const myTeams = await Team.find({ teamLeader });
-        console.log(myTeams);
         if (myTeams) {
             res.status(200).json(myTeams);
         } else {
