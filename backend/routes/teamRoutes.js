@@ -1,6 +1,6 @@
 const express = require('express');
-const Team = require('../models/teamModel');
-const { getAllTeams, getTeam, createTeam, deleteTeam, acceptMember } = require('../controllers/teamController');
+const { getAllTeams, getTeam, getMyTeams, createTeam, deleteTeam, createRequest, acceptMember, rejectMember } = require('../controllers/teamController');
+const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 
@@ -8,19 +8,27 @@ const router = express.Router();
 router.get('/', getAllTeams);
 
 // GET a single team
-router.get('/:id', getTeam);
+router.get('/teamDetail/:id', getTeam);
 
-// DELETE a team
-router.delete('/:id', deleteTeam);
+// require auth for team routes
+router.use(requireAuth);
 
-// UPDATE a team
-// router.patch('/:id', (req, res) => {
-//     res.json({ mssg: 'UPDATE a team' });
-// });
+// GET owned team
+router.get('/myTeams', getMyTeams);
 
 // POST a new team
 router.post('/', createTeam);
 
-router.patch('/position/:id', acceptMember);
+// DELETE a team
+router.delete('/:id', deleteTeam);
+
+// create request teamRequest
+router.patch('/request/:id', createRequest);
+
+// Accept teamMember
+router.patch('/accept/:id', acceptMember);
+
+// Reject teamMember
+router.patch('/reject/:id', rejectMember);
 
 module.exports = router;
