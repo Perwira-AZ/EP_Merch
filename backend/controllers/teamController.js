@@ -7,6 +7,9 @@ const searchTeams = async (req, res) => {
     console.log(filter);
     try {
         const teams = await Team.find(filter);
+        if (!teams) {
+            throw new Error('Failed to search teams');
+        }
         res.status(200).json(teams);
     } catch (err) {
         res.status(400).json({ error: err.message });
@@ -55,6 +58,10 @@ const createTeam = async (req, res) => {
 
     try {
         const team = await Team.create({ teamName, teamLeader, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember });
+        if (!team) {
+            throw new Error('Failed to create team');
+        }
+
         res.status(200).json(team);
     } catch (err) {
         res.status(400).json({ error: err.message() });
@@ -106,6 +113,9 @@ const createRequest = async (req, res) => {
         );
 
         const updatedTeam = await Team.find({ 'teamMember._id': id });
+        if (!updatedTeam) {
+            throw new Error("Team doesn't exist");
+        }
 
         res.status(200).json(updatedTeam);
     } catch (err) {
@@ -147,6 +157,10 @@ const acceptMember = async (req, res) => {
         );
 
         const updatedTeam = await Team.find({ 'teamRequest._id': id });
+        if (!updatedTeam) {
+            throw new Error("Team doesn't exist");
+        }
+
         res.status(200).json({ updatedTeam });
     } catch (err) {
         res.status(400).json({ error: err.message });
@@ -171,6 +185,10 @@ const rejectMember = async (req, res) => {
         );
 
         const updatedTeam = await Team.find({ 'teamRequest._id': id });
+        if (!updatedTeam) {
+            throw new Error("Team doesn't exist");
+        }
+
         res.status(200).json({ updatedTeam });
     } catch (err) {
         res.status(400).json({ error: err.message });

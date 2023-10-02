@@ -45,7 +45,7 @@ const updateUser = async (req, res) => {
 
         const updatedUser = await User.findById(id);
 
-        if (!user) {
+        if (!updatedUser) {
             throw new Error("User doesn't exist");
         }
 
@@ -61,6 +61,9 @@ const registerUser = async (req, res) => {
 
     try {
         const user = await User.register(name, userName, userEmail, password);
+        if (!user) {
+            throw new Error('Failed to create user');
+        }
 
         res.status(200).json({ user });
     } catch (err) {
@@ -75,6 +78,10 @@ const loginUser = async (req, res) => {
     try {
         const user = await User.login(userEmail, password);
         const token = await createToken(user._id);
+
+        if (!token) {
+            throw new Error('Failed to get token');
+        }
 
         res.status(200).json({ token });
     } catch (err) {
