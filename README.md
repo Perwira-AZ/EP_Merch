@@ -111,7 +111,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 #### 4. Create new team
 
 ```http
-  GET /api/teams
+  POST /api/teams
 ```
 
 | Parameter | Type     |
