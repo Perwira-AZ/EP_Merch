@@ -18,3 +18,154 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 ## 📘Entity Relation Diagram
 ![paw-teamup-erd drawio](https://github.com/Perwira-AZ/TeamUP/assets/92919810/f30e5029-0ba0-4caa-8b03-25cacd2250ac)
+
+
+
+## BackEnd Documentation
+### User
+
+#### 1. Register New User
+
+```http
+  POST /api/user/register
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `name` | `string` | 
+| `userName` | `string`|
+| `userEmail` | `string`|
+| `password` | `string`|
+
+#### 2. Login
+
+```http
+  POST /api/user/login
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `userEmail` | `string` |
+| `password` | `string` |
+
+#### 3. Get user info
+
+```http
+  GET /api/user/${userId}
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `userId` | `ObjectId` |
+
+#### 4. Update user info
+
+```http
+  PATCH /api/user/${userId}
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `userId` | `ObjectId` |
+| `name` | `string` | 
+| `userName` | `string` |
+| `userEmail` | `string` |
+| `password` | `string` |
+
+
+### Teams 
+
+#### 1. Search teams
+
+```http
+  GET /api/teams
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `teamName` | `string` | 
+| `teamLocation.province` | `string` |
+| `teamLocation.city` | `string` |
+| `teamCompetition` | `string` |
+
+#### 2. Get team detail
+
+```http
+  GET /api/teams/teamDetail/${teamId}
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `teamId` | `ObjectId` |
+
+#### 3. Get owned team
+
+```http
+  GET /api/teams/myTeams
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `userId` | `ObjectId` |
+
+#### 4. Create new team
+
+```http
+  GET /api/teams
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `teamName` | `string` |
+| `teamLeader` | `string` |
+| `teamLocation.province` | `string` |
+| `teamLocation.city` | `string` |
+| `teamStart` | `date` |
+| `teamEnd` | `date` |
+| `teamCompetition` | `string` |
+| `teamDescription` | `string` |
+| `teamMember.position` | `string` |
+
+#### 5. Delete team
+
+```http
+  DELETE /api/teams/teamDetail/${teamId}
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `userId` | `ObjectId` |
+| `teamId` | `ObjectId` |
+
+#### 6. Make request to join team
+
+```http
+  PATCH /api/teams/request/${positionId}
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `userId` | `ObjectId` |
+| `positionId` | `ObjectId` |
+
+#### 7. Accept request to join team
+
+```http
+  PATCH /api/teams/accept/${requestId}
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `requestId` | `ObjectId` |
+
+#### 8. Reject request to join team
+
+```http
+  PATCH /api/teams/reject/${requestId}
+```
+
+| Parameter | Type     |
+| :-------- | :------- |
+| `requestId` | `ObjectId` |
+
+
