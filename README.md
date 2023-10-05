@@ -26,7 +26,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 1. Register New User
 
-```http
+```
   POST /api/user/register
 ```
 
@@ -39,7 +39,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 2. Login
 
-```http
+```
   POST /api/user/login
 ```
 
@@ -50,7 +50,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 3. Get user info
 
-```http
+```
   GET /api/user/${userId}
 ```
 
@@ -60,7 +60,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 4. Update user info
 
-```http
+```
   PATCH /api/user/${userId}
 ```
 
@@ -77,7 +77,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 1. Search teams
 
-```http
+```
   GET /api/teams
 ```
 
@@ -90,7 +90,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 2. Get team detail
 
-```http
+```
   GET /api/teams/teamDetail/${teamId}
 ```
 
@@ -100,7 +100,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 3. Get owned team
 
-```http
+```
   GET /api/teams/myTeams
 ```
 
@@ -110,7 +110,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 4. Create new team
 
-```http
+```
   POST /api/teams
 ```
 
@@ -128,7 +128,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 5. Delete team
 
-```http
+```
   DELETE /api/teams/teamDetail/${teamId}
 ```
 
@@ -139,7 +139,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 6. Make request to join team
 
-```http
+```
   PATCH /api/teams/request/${positionId}
 ```
 
@@ -150,7 +150,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 7. Accept request to join team
 
-```http
+```
   PATCH /api/teams/accept/${requestId}
 ```
 
@@ -160,7 +160,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 
 #### 8. Reject request to join team
 
-```http
+```
   PATCH /api/teams/reject/${requestId}
 ```
 
