@@ -169,5 +169,5 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 | `requestId` | `ObjectId` |
 
 ## Pra-UTS
-[Presentation Video](https://youtu.be/pWndVrUmbUM)
+[Presentation Video](https://youtu.be/pWndVrUmbUM) <br>
 [Presentation Slide](https://www.canva.com/design/DAFvjNEOXbw/w4OOE8crnTyhCfgRLK9CeQ/edit)
