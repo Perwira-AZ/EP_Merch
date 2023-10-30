@@ -89,9 +89,40 @@ const loginUser = async (req, res) => {
     }
 };
 
+async function addCreatedTeam(user_id, team_id) {
+    const user = await User.findOneAndUpdate(
+        { _id: user_id },
+        {
+            $push: {
+                'team.createdTeam': team_id,
+            },
+        }
+    );
+    return user;
+}
+
+async function addJoinedTeam(user_id, team_id) {
+    const user = await User.findById(user_id);
+
+    if (user) {
+        const joined_ids = user.team.joinedTeam.map((team) => team.toString());
+
+        if (!joined_ids.includes(team_id[0]._id.toString())) {
+            user.team.joinedTeam.push(team_id[0]._id);
+            await user.save();
+        } else {
+            return false;
+        }
+    }
+
+    return user;
+}
+
 module.exports = {
     getUser,
     updateUser,
     registerUser,
     loginUser,
+    addCreatedTeam,
+    addJoinedTeam,
 };

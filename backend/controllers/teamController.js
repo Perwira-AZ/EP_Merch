@@ -1,5 +1,6 @@
 const Team = require('../models/teamModel');
 const mongoose = require('mongoose');
+const { addCreatedTeam, addJoinedTeam } = require('./userController');
 
 // Get all team
 const searchTeams = async (req, res) => {
@@ -54,7 +55,8 @@ const getMyTeams = async (req, res) => {
 
 // Create new team
 const createTeam = async (req, res) => {
-    const { teamName, teamLeader, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember } = req.body;
+    const teamLeader = req.user._id;
+    const { teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember } = req.body;
 
     try {
         const team = await Team.create({ teamName, teamLeader, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember });
@@ -62,9 +64,14 @@ const createTeam = async (req, res) => {
             throw new Error('Failed to create team');
         }
 
+        const appendTeam = await addCreatedTeam(team.teamLeader, team._id);
+        if (!appendTeam) {
+            throw new Error('Failed to create team');
+        }
+
         res.status(200).json(team);
     } catch (err) {
-        res.status(400).json({ error: err.message() });
+        res.status(400).json({ error: err.message });
     }
 };
 
@@ -159,6 +166,12 @@ const acceptMember = async (req, res) => {
         const updatedTeam = await Team.find({ 'teamRequest._id': id });
         if (!updatedTeam) {
             throw new Error("Team doesn't exist");
+        }
+
+        const team_id = await Team.find({ 'teamRequest._id': id }, 'id');
+        const appendTeam = await addJoinedTeam(request.member, team_id);
+        if (!appendTeam) {
+            throw new Error('Failed to add member');
         }
 
         res.status(200).json({ updatedTeam });

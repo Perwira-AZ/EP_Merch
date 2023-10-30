@@ -23,12 +23,22 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
-    team: [
-        {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Team',
-        },
-    ],
+    team: {
+        createdTeam: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Team',
+                unique: true,
+            },
+        ],
+        joinedTeam: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'Team',
+                unique: true,
+            },
+        ],
+    },
 });
 
 // static register method
