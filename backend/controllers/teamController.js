@@ -1,6 +1,6 @@
 const Team = require('../models/teamModel');
 const mongoose = require('mongoose');
-const { addCreatedTeam, addJoinedTeam } = require('./userController');
+const { addCreatedTeam, addJoinedTeam, getTeams } = require('./userController');
 
 // Get all team
 const searchTeams = async (req, res) => {
@@ -37,17 +37,31 @@ const getTeam = async (req, res) => {
     }
 };
 
-// Get owned team
+// Get my team
 const getMyTeams = async (req, res) => {
-    const teamLeader = await req.user._id;
+    const id = await req.user._id;
 
     try {
-        const myTeams = await Team.find({ teamLeader });
-        if (myTeams) {
-            res.status(200).json(myTeams);
-        } else {
-            res.status(200).json({ message: "You don't have a team" });
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new Error("User doesn't exist");
         }
+
+        const { team } = await getTeams(id);
+        const { createdTeam } = await team;
+        const { joinedTeam } = await team;
+
+        const getCreatedTeam = await Promise.all(
+            createdTeam.map(async (team_id) => {
+                return await Team.findById(team_id, 'teamName teamLocation teamStart teamEnd');
+            })
+        );
+        const getJoinedTeam = await Promise.all(
+            joinedTeam.map(async (team_id) => {
+                return await Team.findById(team_id, 'teamName teamLocation teamStart teamEnd');
+            })
+        );
+
+        res.status(200).json({ myTeamCreated: getCreatedTeam, myTeamJoined: getJoinedTeam });
     } catch (err) {
         res.status(400).json({ error: err.message });
     }

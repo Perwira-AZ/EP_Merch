@@ -118,6 +118,11 @@ async function addJoinedTeam(user_id, team_id) {
     return user;
 }
 
+async function getTeams(user_id) {
+    const user = await User.findById(user_id, 'team');
+    return user;
+}
+
 module.exports = {
     getUser,
     updateUser,
@@ -125,4 +130,5 @@ module.exports = {
     loginUser,
     addCreatedTeam,
     addJoinedTeam,
+    getTeams,
 };
