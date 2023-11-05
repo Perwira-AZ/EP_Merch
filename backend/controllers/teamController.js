@@ -1,4 +1,5 @@
 const Team = require('../models/teamModel');
+const User = require('../models/userModel');
 const mongoose = require('mongoose');
 const { addCreatedTeam, addJoinedTeam, getTeams } = require('./userController');
 
@@ -144,6 +145,44 @@ const createRequest = async (req, res) => {
     }
 };
 
+const viewRequest = async (req, res) => {
+    const id = await req.user._id;
+    try {
+        const teams = await Team.find({ teamLeader: id }, 'teamRequest');
+        let joinRequest = [];
+        teams.map((team) => {
+            if (team.teamRequest.length > 0) {
+                joinRequest = [...joinRequest, ...team.teamRequest];
+            }
+        });
+
+        if (joinRequest.length > 0) {
+            let request = [];
+            await Promise.all(
+                joinRequest.map(async (req) => {
+                    if (req.status === 'Requesting') {
+                        const user = await User.findById(req.member, 'name userName');
+                        const team = await Team.find({ 'teamMember._id': req.position }, { teamName: 1, 'teamMember.$': 1 });
+                        const item = {
+                            id,
+                            name: user.name,
+                            userName: user.userName,
+                            teamName: team[0].teamName,
+                            position: team[0].teamMember[0].position,
+                        };
+                        request.push(item);
+                    }
+                })
+            );
+            res.status(200).json(request);
+        } else {
+            throw new Error('No request');
+        }
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+};
+
 //Accepting request for position
 const acceptMember = async (req, res) => {
     const { id } = req.params;
@@ -229,6 +268,7 @@ module.exports = {
     createTeam,
     deleteTeam,
     createRequest,
+    viewRequest,
     acceptMember,
     rejectMember,
 };

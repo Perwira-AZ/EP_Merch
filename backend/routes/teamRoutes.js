@@ -1,5 +1,15 @@
 const express = require('express');
-const { searchTeams, getTeam, getMyTeams, createTeam, deleteTeam, createRequest, acceptMember, rejectMember } = require('../controllers/teamController');
+const {
+    searchTeams,
+    getTeam,
+    getMyTeams,
+    createTeam,
+    deleteTeam,
+    createRequest,
+    viewRequest,
+    acceptMember,
+    rejectMember,
+} = require('../controllers/teamController');
 const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
@@ -24,6 +34,9 @@ router.delete('/:id', deleteTeam);
 
 // create request teamRequest
 router.patch('/request/:id', createRequest);
+
+// View request for created team
+router.get('/request', viewRequest);
 
 // Accept teamMember
 router.patch('/accept/:id', acceptMember);
