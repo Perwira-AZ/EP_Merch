@@ -23,6 +23,9 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    profilePict: {
+        type: String,
+    },
     team: {
         createdTeam: [
             {

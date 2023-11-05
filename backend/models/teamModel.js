@@ -37,6 +37,9 @@ const teamSchema = new Schema({
     teamDescription: {
         type: String,
     },
+    teamLogo: {
+        type: String,
+    },
     teamMember: [
         {
             position: String,
