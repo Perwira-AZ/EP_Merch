@@ -164,7 +164,7 @@ const viewRequest = async (req, res) => {
                         const user = await User.findById(req.member, 'name userName');
                         const team = await Team.find({ 'teamMember._id': req.position }, { teamName: 1, 'teamMember.$': 1 });
                         const item = {
-                            id,
+                            id: req._id,
                             name: user.name,
                             userName: user.userName,
                             teamName: team[0].teamName,
