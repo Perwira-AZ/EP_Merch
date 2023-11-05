@@ -52,12 +52,12 @@ const getMyTeams = async (req, res) => {
 
         const getCreatedTeam = await Promise.all(
             createdTeam.map(async (team_id) => {
-                return await Team.findById(team_id, 'teamName teamLocation teamStart teamEnd');
+                return await Team.findById(team_id, 'teamName teamCompetition teamLocation teamStart teamEnd');
             })
         );
         const getJoinedTeam = await Promise.all(
             joinedTeam.map(async (team_id) => {
-                return await Team.findById(team_id, 'teamName teamLocation teamStart teamEnd');
+                return await Team.findById(team_id, 'teamName teamCompetition teamLocation teamStart teamEnd');
             })
         );
 

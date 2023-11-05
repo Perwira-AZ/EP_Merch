@@ -23,7 +23,7 @@ const getUser = async (req, res) => {
 
         res.status(200).json(user);
     } catch (err) {
-        res.status(404).json({ error: err.message() });
+        res.status(404).json({ error: err.message });
     }
 };
 
@@ -89,6 +89,24 @@ const loginUser = async (req, res) => {
     }
 };
 
+const getUserLoggedIn = async (req, res) => {
+    const id = await req.user._id;
+    try {
+        if (!mongoose.Types.ObjectId.isValid(id)) {
+            throw new Error("User doesn't exist3");
+        }
+
+        const user = await User.findById(id, 'name userName userEmail');
+        if (!user) {
+            throw new Error("User doesn't exist2");
+        }
+
+        res.status(200).json(user);
+    } catch (err) {
+        res.status(400).json({ error: err.message });
+    }
+};
+
 async function addCreatedTeam(user_id, team_id) {
     const user = await User.findOneAndUpdate(
         { _id: user_id },
@@ -128,6 +146,7 @@ module.exports = {
     updateUser,
     registerUser,
     loginUser,
+    getUserLoggedIn,
     addCreatedTeam,
     addJoinedTeam,
     getTeams,
