@@ -19,13 +19,13 @@ async function fetchWithtoken(url, options = {}) {
 }
 
 //User
-async function login({ email, password }) {
+async function login({ userEmail, password }) {
     const response = await fetch(`${BASE_URL}/user/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ userEmail, password }),
     });
     const responseJson = await response.json();
 
