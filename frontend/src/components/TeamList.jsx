@@ -6,9 +6,7 @@ function TeamList({ teams }) {
     return (
         <div className="my-team__list">
             {teams.map((team) => (
-                <Link>
-                    <TeamCard key={team._id} team={team} />
-                </Link>
+                <TeamCard key={team._id} team={team} />
             ))}
         </div>
     );

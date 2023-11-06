@@ -10,10 +10,18 @@ function Header() {
                 <img src={TeamUP} alt="" />
             </div>
             <ul className="header__menu">
-                <li>Home</li>
-                <li>My Team</li>
-                <li>Explore Team</li>
-                <li>Profile</li>
+                <Link to="/">
+                    <li>Home</li>
+                </Link>
+                <Link to="/myteam">
+                    <li>My Team</li>
+                </Link>
+                <Link>
+                    <li>Explore Team</li>
+                </Link>
+                <Link>
+                    <li>Profile</li>
+                </Link>
             </ul>
             <div className="header__logout">
                 <TbLogout />
