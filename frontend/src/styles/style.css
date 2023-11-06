@@ -7,6 +7,11 @@ body {
     background-color: #d7fff7;
 }
 
+a {
+    text-decoration: none;
+    color: #fff;
+}
+
 /* header */
 header {
     position: fixed;
@@ -83,7 +88,6 @@ header {
     grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
     gap: 10px;
     grid-auto-rows: auto;
-    color: #fff;
 }
 
 /* team card */
@@ -94,6 +98,7 @@ header {
     background-color: #2a78ae;
     border-radius: 15px;
     box-sizing: border-box;
+    color: #fff;
 }
 
 .my-team__profile-wrap {
