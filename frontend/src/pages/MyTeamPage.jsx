@@ -25,7 +25,7 @@ function MyTeamPage() {
                 <div className="created-team">
                     <div className="created-team__header">
                         <h2 className="my-team__title">Created Team</h2>
-                        <Link>
+                        <Link to="/joinrequest">
                             <button className="my-team__join-request">Join Request</button>
                         </Link>
                     </div>
