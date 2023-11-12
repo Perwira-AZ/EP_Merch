@@ -20,14 +20,16 @@ function MyTeamPage() {
     }, []);
 
     return (
-        <div className="myTeamPage bg-zinc-50 px-15 pb-8">
+        <div className="myTeamPage bg-zinc-50 pt-[60px] pb-8 min-h-screen box-border">
             <div className="my-team">
                 <div className="mx-auto min-[1330px]:max-w-7xl min-[900px]:max-w-[840px] max-w-[400px]">
                     <div className="created-team">
                         <div className="pt-16 mb-7 flex flex-row items-center justify-between">
                             <h2 className="text-indigo-950 text-[45px] font-bold leading-[34px]">Created Team</h2>
                             <Link to="/joinrequest" className="w-48">
-                                <button className="w-full h-12 bg-indigo-950 rounded-xl text-white text-lg">Join Request</button>
+                                <button className="w-full h-12 transition ease-in-out duration-100 bg-indigo-950 hover:scale-105 active:scale-100 rounded-xl text-white text-lg">
+                                    Join Request
+                                </button>
                             </Link>
                         </div>
                         {isLoading ? (
@@ -38,7 +40,9 @@ function MyTeamPage() {
                             <p>No Team</p>
                         )}
                         <Link className="w-full">
-                            <button className="w-full h-12 bg-indigo-950 rounded-xl text-white text-lg">+ Create New Team</button>
+                            <button className="w-full h-12 transition ease-in-out duration-100 bg-indigo-950 hover:scale-[1.02] active:scale-[1.005] rounded-xl text-white text-lg">
+                                + Create New Team
+                            </button>
                         </Link>
                     </div>
                     <div className="joined-team">

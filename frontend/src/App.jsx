@@ -27,7 +27,7 @@ function App() {
     }
 
     return (
-        <div className="app-container">
+        <div className="app-container min-h-screen">
             <Header />
             <Routes>
                 <Route path="/" element={<LoginPage onLogin={onLogin} />} />

@@ -19,9 +19,11 @@ function JoinRequestPage() {
     }, []);
 
     return (
-        <div className="join-request">
-            <h2 className="join-request__title">Team Join Request</h2>
-            {isLoading ? <p>Loading...</p> : joinReq != null ? <JoinRequestList requests={joinReq} /> : <p>No Request</p>}
+        <div className="join-request bg-zinc-50 pt-[60px] pb-8 min-h-screen box-border">
+            <div className="pt-16 mx-auto min-[1330px]:max-w-7xl min-[900px]:max-w-[840px] max-w-[400px]">
+                <h2 className="text-indigo-950 text-5xl font-bold leading-[34px] mb-20 text-center">Team Join Request</h2>
+                {isLoading ? <p>Loading...</p> : joinReq != null ? <JoinRequestList requests={joinReq} /> : <p>No Request</p>}
+            </div>
         </div>
     );
 }
