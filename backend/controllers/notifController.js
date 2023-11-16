@@ -22,7 +22,7 @@ const addNotif = async (req, res) => {
 const getNotif = async (req, res) => {
   const user = req.user._id;
   try {
-    const notif = await Notif.find({ user }, 'notifType notifMessage notifDate');
+    const notif = await Notif.find({ user }, '_id notifType notifMessage notifDate').sort({ notifDate: -1 });
     if (!notif) {
       throw new Error('Failed to get notif');
     }

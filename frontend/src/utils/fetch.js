@@ -113,4 +113,14 @@ async function addNotif({ user, notifType, notifMessage }) {
   return { error: false, data: responseJson };
 }
 
-export { getToken, login, logout, getUserLoggedIn, getMyTeam, viewRequests, acceptMember, rejectMember, addNotif };
+async function getNotif() {
+  const response = await fetchWithtoken(`${BASE_URL}/notif/myNotif`);
+  const responseJson = await response.json();
+
+  if (responseJson.error) {
+    return { error: true, data: null };
+  }
+  return { error: false, data: responseJson.notif };
+}
+
+export { getToken, login, logout, getUserLoggedIn, getMyTeam, viewRequests, acceptMember, rejectMember, addNotif, getNotif };

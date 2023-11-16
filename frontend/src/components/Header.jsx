@@ -5,7 +5,7 @@ import TeamUP from '../assets/Team.png';
 import { Link } from 'react-router-dom';
 import { logout } from '../utils/fetch';
 
-function Header() {
+function Header({ clickNotif }) {
   return (
     <header className="z-[100] bg-blue-500 shadow fixed top-0 left-0 h-[60px] w-full box-border flex flex-row justify-between items-center px-6">
       <div className="header__logo">
@@ -26,7 +26,7 @@ function Header() {
         </Link>
       </ul>
       <div className="text-white text-3xl">
-        <button className="mx-2 px-0 pb-0 pt-2">
+        <button className="mx-2 px-0 pb-0 pt-2" onClick={() => clickNotif()}>
           <IoNotificationsSharp />
         </button>
         <button className="mx-2 px-0 pb-0 pt-2" onClick={logout}>
