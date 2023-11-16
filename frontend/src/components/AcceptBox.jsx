@@ -1,9 +1,10 @@
 import React from 'react';
 import { acceptMember, addNotif } from '../utils/fetch';
 
-function AcceptBox({ toWait, reqId, reqMember, reqName }) {
-  const [message, setMessage] = React.useState(`Congratulations ${reqName}, You are accepted to become our member.`);
-
+function AcceptBox({ toWait, req }) {
+  const [message, setMessage] = React.useState(
+    `Congratulations ${req.name}, You are accepted to fill position "${req.position}" in our team "${req.teamName}".`
+  );
   function onMessageChange(event) {
     setMessage(event.target.value);
   }
@@ -31,12 +32,12 @@ function AcceptBox({ toWait, reqId, reqMember, reqName }) {
           id="message"
           cols="40"
           rows="7"
-          defaultValue={`Congratulations ${reqName}, You are accepted to become our member.`}
+          defaultValue={`Congratulations ${req.name}, You are accepted to fill position "${req.position}" in our team "${req.teamName}".`}
         />
 
         <div className="flex gap-3 justify-between mt-3">
           <button
-            onClick={() => onAccept(reqId, reqMember)}
+            onClick={() => onAccept(req.id, req.member)}
             className="rounded-xl w-44 h-10 p-0 text-white text-normal text-lg bg-gradient-to-l from-blue-500 to-cyan-300 transition ease-in-out duration-150 hover:scale-105 active:scale-100"
           >
             Accept

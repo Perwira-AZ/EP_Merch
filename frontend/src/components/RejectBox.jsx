@@ -1,9 +1,10 @@
 import React from 'react';
 import { rejectMember, addNotif } from '../utils/fetch';
 
-function RejectBox({ toWait, reqId, reqMember, reqName }) {
-  const [message, setMessage] = React.useState(`Sorry ${reqName}, we have to reject you. Good luck next time.`);
-
+function RejectBox({ toWait, req }) {
+  const [message, setMessage] = React.useState(
+    `Sorry ${req.name}, we have to reject you for position "${req.position}" in "${req.teamName}". Good luck next time.`
+  );
   function onMessageChange(event) {
     setMessage(event.target.value);
   }
@@ -32,11 +33,11 @@ function RejectBox({ toWait, reqId, reqMember, reqName }) {
           id="message"
           cols="40"
           rows="7"
-          defaultValue={`Sorry ${reqName}, we have to reject you. Good luck next time.`}
+          defaultValue={`Sorry ${req.name}, we have to reject you for position "${req.position}" in "${req.teamName}". Good luck next time.`}
         />
         <div className="flex gap-3 justify-between mt-3">
           <button
-            onClick={() => onReject(reqId, reqMember)}
+            onClick={() => onReject(req.id, req.member)}
             className="rounded-xl w-44 h-10 p-0 text-white text-normal text-lg bg-gradient-to-l from-red-500 to-red-600 transition ease-in-out duration-150 hover:scale-105 active:scale-100"
           >
             Reject

@@ -20,13 +20,13 @@ function JoinRequestItem({ request, accept, reject }) {
       <div className="join-request__button flex flex-col gap-3">
         <button
           className="w-40 h-12 text-white rounded-xl transition ease-in-out duration-150 bg-blue-500 hover:scale-105 hover:bg-blue-600 active:scale-100"
-          onClick={() => accept(request.id, request.member, request.name)}
+          onClick={() => accept(request)}
         >
           Accept
         </button>
         <button
           className="w-40 h-12 text-white rounded-xl transition ease-in-out duration-150 bg-red-500 hover:scale-105 hover:bg-red-600 active:scale-100"
-          onClick={() => reject(request.id, request.member, request.name)}
+          onClick={() => reject(request)}
         >
           Reject
         </button>

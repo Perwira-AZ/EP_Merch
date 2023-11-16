@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 function LoginPage({ onLogin }) {
   const [user, setUser] = React.useState({
-    userEmail: "",
-    password: "",
+    userEmail: '',
+    password: '',
   });
 
   function onEmailChange(event) {
@@ -21,7 +21,6 @@ function LoginPage({ onLogin }) {
   }
 
   function onSubmitHandler(event) {
-    console.log(user);
     event.preventDefault();
     onLogin(user);
   }
