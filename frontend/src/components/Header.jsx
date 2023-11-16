@@ -1,7 +1,9 @@
-import React from "react";
-import { TbLogout } from "react-icons/tb";
-import TeamUP from "../assets/Team.png";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { TbLogout } from 'react-icons/tb';
+import { IoNotificationsSharp } from 'react-icons/io5';
+import TeamUP from '../assets/Team.png';
+import { Link } from 'react-router-dom';
+import { logout } from '../utils/fetch';
 
 function Header() {
   return (
@@ -24,7 +26,12 @@ function Header() {
         </Link>
       </ul>
       <div className="text-white text-3xl">
-        <TbLogout />
+        <button className="mx-2 px-0 pb-0 pt-2">
+          <IoNotificationsSharp />
+        </button>
+        <button className="mx-2 px-0 pb-0 pt-2" onClick={logout}>
+          <TbLogout />
+        </button>
       </div>
     </header>
   );
