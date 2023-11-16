@@ -22,21 +22,17 @@ function JoinRequestPage() {
       });
   }, []);
 
-  function changeAccept(id, member, name) {
+  function changeAccept(req) {
     setIdle({
       status: 'accepting',
-      reqId: id,
-      member,
-      name,
+      req,
     });
   }
 
-  function changeReject(id, member, name) {
+  function changeReject(req) {
     setIdle({
       status: 'rejecting',
-      reqId: id,
-      member,
-      name,
+      req,
     });
   }
 
@@ -52,12 +48,12 @@ function JoinRequestPage() {
       {idle.status === 'accepting' ? (
         <div>
           <Cover />
-          <AcceptBox toWait={changeWaiting} reqId={idle.reqId} reqMember={idle.member} reqName={idle.name} />
+          <AcceptBox toWait={changeWaiting} req={idle.req} />
         </div>
       ) : idle.status === 'rejecting' ? (
         <div>
           <Cover />
-          <RejectBox toWait={changeWaiting} reqId={idle.reqId} reqMember={idle.member} reqName={idle.name} />
+          <RejectBox toWait={changeWaiting} req={idle.req} />
         </div>
       ) : null}
 
