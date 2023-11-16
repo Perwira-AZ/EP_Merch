@@ -6,6 +6,7 @@ import LoginPage from "./pages/LoginPage";
 import MyTeamPage from "./pages/MyTeamPage";
 import JoinRequestPage from "./pages/JoinRequestPage";
 import ExploreTeamPage from "./pages/ExploreTeamPage";
+import CreateNewTeamPage from "./pages/CreateNewTeamPage";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -35,6 +36,7 @@ function App() {
         <Route path="/myteam" element={<MyTeamPage />} />
         <Route path="/joinrequest" element={<JoinRequestPage />} />
         <Route path="/exploreteam" element={<ExploreTeamPage />} />
+        <Route path="/createnewteam" element={<CreateNewTeamPage />} />
       </Routes>
     </div>
   );

@@ -1,9 +1,25 @@
 import React from "react";
+import { getMyTeam } from "../utils/fetch";
+import TeamList from "../components/TeamList";
 
 function ExploreTeamPage() {
+  const [myTeam, setMyTeam] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(true);
+
+  React.useEffect(() => {
+    getMyTeam()
+      .then(({ data }) => {
+        setMyTeam(data);
+        setIsLoading(false); // Set loading to false after data is fetched
+      })
+      .catch(({ error }) => {
+        console.error("Error fetching data:", error);
+        setIsLoading(false); // Set loading to false in case of an error
+      });
+  }, []);
   return (
-    <div className="myTeamPage bg-zinc-50 pt-[60px] pb-8 min-h-screen box-border">
-      <div className="my-team">
+    <div className="exploreTeamPage bg-zinc-50 pt-[60px] pb-8 min-h-screen box-border">
+      <div className="explore-team-page">
         <div className="mx-auto min-[1330px]:max-w-7xl min-[900px]:max-w-[840px] max-w-[400px]">
           <div className="explore-team">
             <div className="pt-16 mb-7 flex flex-row items-center justify-center">
@@ -17,6 +33,7 @@ function ExploreTeamPage() {
                 placeholder="Find by Name or Competition"
               />
             </div>
+            {isLoading ? <p>Loading...</p> : myTeam != null && myTeam.myTeamCreated.length ? <TeamList teams={myTeam.myTeamCreated} /> : <p>No Team</p>}
           </div>
         </div>
       </div>
