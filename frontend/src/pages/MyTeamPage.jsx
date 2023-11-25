@@ -1,7 +1,7 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { getMyTeam } from "../utils/fetch";
-import TeamList from "../components/TeamList";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { getMyTeam } from '../utils/fetch';
+import TeamList from '../components/TeamList';
 
 function MyTeamPage() {
   const [myTeam, setMyTeam] = React.useState([]);
@@ -14,7 +14,7 @@ function MyTeamPage() {
         setIsLoading(false); // Set loading to false after data is fetched
       })
       .catch(({ error }) => {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
         setIsLoading(false); // Set loading to false in case of an error
       });
   }, []);
@@ -27,12 +27,16 @@ function MyTeamPage() {
             <div className="pt-16 mb-7 flex flex-row items-center justify-between">
               <h2 className="text-indigo-950 text-[45px] font-bold leading-[34px]">Created Team</h2>
               <Link to="/joinrequest" className="w-48">
-                <button className="w-full h-12 transition ease-in-out duration-100 bg-indigo-950 hover:scale-105 active:scale-100 rounded-xl text-white text-lg">Join Request</button>
+                <button className="w-full h-12 transition ease-in-out duration-100 bg-indigo-950 hover:scale-105 active:scale-100 rounded-xl text-white text-lg">
+                  Join Request
+                </button>
               </Link>
             </div>
             {isLoading ? <p>Loading...</p> : myTeam != null && myTeam.myTeamCreated.length ? <TeamList teams={myTeam.myTeamCreated} /> : <p>No Team</p>}
             <Link to="/createnewteam" className="w-full">
-              <button className="w-full h-12 transition ease-in-out duration-100 bg-indigo-950 hover:scale-[1.02] active:scale-[1.005] rounded-xl text-white text-lg">+ Create New Team</button>
+              <button className="w-full h-12 transition ease-in-out duration-100 bg-indigo-950 hover:scale-[1.02] active:scale-[1.005] rounded-xl text-white text-lg">
+                + Create New Team
+              </button>
             </Link>
           </div>
           <div className="joined-team">
