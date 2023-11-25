@@ -1,6 +1,65 @@
-import React from "react";
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { register } from '../utils/fetch';
 
 function RegisterPage() {
+  const [user, setUser] = React.useState();
+  const [confirmPassword, setConfirmPassword] = React.useState();
+
+  const navigate = useNavigate();
+
+  function onNameChange(event) {
+    setUser((prevState) => ({
+      ...prevState,
+      name: event.target.value,
+    }));
+  }
+
+  function onUsernameChange(event) {
+    setUser((prevState) => ({
+      ...prevState,
+      userName: event.target.value,
+    }));
+  }
+
+  function onEmailChange(event) {
+    setUser((prevState) => ({
+      ...prevState,
+      userEmail: event.target.value,
+    }));
+  }
+
+  function onPasswordChange(event) {
+    setUser((prevState) => ({
+      ...prevState,
+      password: event.target.value,
+    }));
+  }
+
+  function onConfirmPasswordChange(event) {
+    setConfirmPassword(event.target.value);
+  }
+
+  async function onSubmitHandler(event) {
+    event.preventDefault();
+    if (!user.userName || !user.userEmail || !user.password || !confirmPassword) {
+      alert('Please fill all the fields');
+      return;
+    } else if (user.password !== confirmPassword) {
+      alert('Password confirmation does not match');
+      return;
+    } else {
+      const response = await register(user);
+      console.log(response);
+      if (!response.error) {
+        alert('Register success');
+        navigate('/login');
+      } else {
+        alert(response.data);
+      }
+    }
+  }
+
   return (
     <div className="bg-[#f1f8ff] flex flex-row justify-center w-full pt-[120px]">
       <div className="flex items-center justify-center w-[870px] h-[1002px] top-[146px] left-[525px] rounded-[30px] shadow-[0px_4px_4px_#00000040] [background:linear-gradient(180deg,rgb(36,131,240)_0%,rgb(112,229,255)_87.12%)] flex">
@@ -10,13 +69,13 @@ function RegisterPage() {
             <div className="text-indigo-950 text-xl font-bold font-['Poppins'] leading-[21.06px]">
               <h1 className="text-2xl font-bold mb-8">Register new account</h1>
             </div>
-            <form>
+            <form onSubmit={onSubmitHandler}>
               {/* Full Name */}
               <div className="mb-4">
                 <label htmlFor="fullName" className="text-sm">
                   Full Name
                 </label>
-                <div className="w-[487px] h-[42px] bg-white rounded-[4.92px] shadow">
+                <div onChange={onNameChange} className="w-[487px] h-[42px] bg-white rounded-[4.92px] shadow">
                   <input type="text" id="fullName" placeholder="Enter your full name" className="input-field" />
                 </div>
               </div>
@@ -26,7 +85,7 @@ function RegisterPage() {
                 <label htmlFor="username" className="text-sm">
                   Username
                 </label>
-                <div className="w-[487px] h-[42px] bg-white rounded-[4.92px] shadow">
+                <div onChange={onUsernameChange} className="w-[487px] h-[42px] bg-white rounded-[4.92px] shadow">
                   <input type="text" id="username" placeholder="Choose a username" className="input-field" />
                 </div>
               </div>
@@ -37,7 +96,7 @@ function RegisterPage() {
                   Email
                 </label>
                 <div className="w-[487px] h-[42px] bg-white rounded-[4.92px] shadow">
-                  <input type="email" id="email" placeholder="Enter your email address" className="input-field" />
+                  <input onChange={onEmailChange} type="email" id="email" placeholder="Enter your email address" className="input-field" />
                 </div>
               </div>
 
@@ -47,7 +106,7 @@ function RegisterPage() {
                   Password
                 </label>
                 <div className="w-[487px] h-[42px] bg-white rounded-[4.92px] shadow">
-                  <input type="password" id="password" placeholder="Enter your password" className="input-field" />
+                  <input onChange={onPasswordChange} type="password" id="password" placeholder="Enter your password" className="input-field" />
                 </div>
               </div>
 
@@ -57,7 +116,7 @@ function RegisterPage() {
                   Password Confirmation
                 </label>
                 <div className="w-[487px] h-[42px] bg-white rounded-[4.92px] shadow">
-                  <input type="password" id="confirmPassword" placeholder="Confirm your password" className="input-field" />
+                  <input onChange={onConfirmPasswordChange} type="password" id="confirmPassword" placeholder="Confirm your password" className="input-field" />
                 </div>
               </div>
 
@@ -68,9 +127,9 @@ function RegisterPage() {
             <div className="mb-4 text-left">
               <p className="text-sm mt-4">
                 Already have an account?
-                <a className="text-blue-500" href="#">
+                <Link to="/login" className="text-blue-500">
                   Login
-                </a>
+                </Link>
               </p>
             </div>
           </div>

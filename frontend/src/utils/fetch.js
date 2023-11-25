@@ -19,6 +19,22 @@ async function fetchWithtoken(url, options = {}) {
 }
 
 //User
+async function register({ name, userName, userEmail, password }) {
+  const response = await fetch(`${BASE_URL}/user/register`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name, userName, userEmail, password }),
+  });
+  const responseJson = await response.json();
+
+  if (responseJson.error) {
+    return { error: true, data: responseJson.error };
+  }
+  return { error: false, data: responseJson };
+}
+
 async function login({ userEmail, password }) {
   const response = await fetch(`${BASE_URL}/user/login`, {
     method: 'POST',
@@ -58,6 +74,22 @@ async function getMyTeam() {
 
   if (responseJson.error) {
     return { error: true, data: null };
+  }
+  return { error: false, data: responseJson };
+}
+
+async function createTeam({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember }) {
+  const response = await fetchWithtoken(`${BASE_URL}/teams`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember }),
+  });
+  const responseJson = await response.json();
+
+  if (responseJson.error) {
+    return { error: true, data: responseJson.error };
   }
   return { error: false, data: responseJson };
 }
@@ -106,6 +138,7 @@ async function rejectMember(id) {
   return { error: false, data: responseJson };
 }
 
+//Notif
 async function addNotif({ user, notifType, notifMessage }) {
   const response = await fetchWithtoken(`${BASE_URL}/notif/newNotif`, {
     method: 'POST',
@@ -133,20 +166,4 @@ async function getNotif() {
   return { error: false, data: responseJson.notif };
 }
 
-async function createTeam({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember }) {
-  const response = await fetchWithtoken(`${BASE_URL}/teams`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember }),
-  });
-  const responseJson = await response.json();
-
-  if (responseJson.error) {
-    return { error: true, data: responseJson.error };
-  }
-  return { error: false, data: responseJson };
-}
-
-export { getToken, searchTeam, login, logout, getUserLoggedIn, getMyTeam, viewRequests, acceptMember, rejectMember, addNotif, getNotif, createTeam };
+export { getToken, searchTeam, register, login, logout, getUserLoggedIn, getMyTeam, viewRequests, acceptMember, rejectMember, addNotif, getNotif, createTeam };

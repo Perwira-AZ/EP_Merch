@@ -1,14 +1,14 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { login, getUserLoggedIn } from "./utils/fetch";
-import Header from "./components/Header";
-import LoginPage from "./pages/LoginPage";
-import MyTeamPage from "./pages/MyTeamPage";
-import JoinRequestPage from "./pages/JoinRequestPage";
-import ExploreTeamPage from "./pages/ExploreTeamPage";
-import NotificationBar from "./components/NotificationBar";
-import CreateNewTeamPage from "./pages/CreateNewTeamPage";
-import RegisterPage from "./pages/RegisterPage";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { login, getUserLoggedIn } from './utils/fetch';
+import Header from './components/Header';
+import LoginPage from './pages/LoginPage';
+import MyTeamPage from './pages/MyTeamPage';
+import JoinRequestPage from './pages/JoinRequestPage';
+import ExploreTeamPage from './pages/ExploreTeamPage';
+import NotificationBar from './components/NotificationBar';
+import CreateNewTeamPage from './pages/CreateNewTeamPage';
+import RegisterPage from './pages/RegisterPage';
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -41,6 +41,7 @@ function App() {
       {viewNotif === true ? <NotificationBar /> : null}
       <Routes>
         <Route path="/" element={<LoginPage onLogin={onLogin} />} />
+        <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
         <Route path="/myteam" element={<MyTeamPage />} />
         <Route path="/joinrequest" element={<JoinRequestPage />} />
         <Route path="/exploreteam" element={<ExploreTeamPage />} />
