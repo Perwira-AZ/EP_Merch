@@ -62,6 +62,16 @@ async function getMyTeam() {
   return { error: false, data: responseJson };
 }
 
+async function searchTeam() {
+  const response = await fetchWithtoken(`${BASE_URL}/teams`);
+  const responseJson = await response.json();
+
+  if (responseJson.error) {
+    return { error: true, data: null };
+  }
+  return { error: false, data: responseJson };
+}
+
 async function viewRequests() {
   const response = await fetchWithtoken(`${BASE_URL}/teams/request`);
   const responseJson = await response.json();
@@ -123,4 +133,20 @@ async function getNotif() {
   return { error: false, data: responseJson.notif };
 }
 
-export { getToken, login, logout, getUserLoggedIn, getMyTeam, viewRequests, acceptMember, rejectMember, addNotif, getNotif };
+async function createTeam({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember }) {
+  const response = await fetchWithtoken(`${BASE_URL}/teams`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember }),
+  });
+  const responseJson = await response.json();
+
+  if (responseJson.error) {
+    return { error: true, data: responseJson.error };
+  }
+  return { error: false, data: responseJson };
+}
+
+export { getToken, searchTeam, login, logout, getUserLoggedIn, getMyTeam, viewRequests, acceptMember, rejectMember, addNotif, getNotif, createTeam };

@@ -6,7 +6,6 @@ const { addCreatedTeam, addJoinedTeam, getTeams } = require('./userController');
 // Get all team
 const searchTeams = async (req, res) => {
   const filter = req.body;
-  console.log(filter);
   try {
     const teams = await Team.find(filter);
     if (!teams) {
