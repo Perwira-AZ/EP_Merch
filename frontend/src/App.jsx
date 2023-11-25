@@ -8,6 +8,7 @@ import JoinRequestPage from "./pages/JoinRequestPage";
 import ExploreTeamPage from "./pages/ExploreTeamPage";
 import NotificationBar from "./components/NotificationBar";
 import CreateNewTeamPage from "./pages/CreateNewTeamPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -44,6 +45,7 @@ function App() {
         <Route path="/joinrequest" element={<JoinRequestPage />} />
         <Route path="/exploreteam" element={<ExploreTeamPage />} />
         <Route path="/createnewteam" element={<CreateNewTeamPage />} />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </div>
   );
