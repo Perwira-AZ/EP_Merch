@@ -13,7 +13,7 @@ function ExploreTeamPage() {
   const [isLoading, setIsLoading] = React.useState(true);
 
   const provinceList = ['--Select Province--', ...selectProvince()];
-  const [cityList, setCityList] = React.useState(['--Select City--', ...selectCity(activeProvince)] || ['--Select City--']);
+  const [cityList, setCityList] = React.useState(activeProvince ? ['--Select City--', ...selectCity(activeProvince)] : ['--Select City--']);
 
   React.useEffect(() => {
     searchTeam(activeKeyword, activeProvince, activeCity)
