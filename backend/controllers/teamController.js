@@ -5,11 +5,17 @@ const { addCreatedTeam, addJoinedTeam, getTeams } = require('./userController');
 
 // Get all team
 const searchTeams = async (req, res) => {
-  const { keyword } = req.query;
+  const { keyword, province, city } = req.query;
 
   try {
     const teams = await Team.find({
-      $or: [{ teamName: { $regex: keyword, $options: 'i' } }, { teamDescription: { $regex: keyword, $options: 'i' } }],
+      $and: [
+        {
+          $or: [{ teamName: { $regex: keyword, $options: 'i' } }, { teamCompetition: { $regex: keyword, $options: 'i' } }],
+        },
+        { 'teamLocation.province': { $regex: province, $options: 'i' } },
+        { 'teamLocation.city': { $regex: city, $options: 'i' } },
+      ],
     });
 
     if (!teams) {

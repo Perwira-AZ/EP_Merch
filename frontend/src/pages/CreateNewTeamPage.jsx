@@ -187,7 +187,7 @@ function CreateNewTeamPage() {
                       {city}
                     </option>
                   ))}
-                </select>{' '}
+                </select>
               </div>
             </div>
 
