@@ -94,8 +94,8 @@ async function createTeam({ teamName, teamLocation, teamStart, teamEnd, teamComp
   return { error: false, data: responseJson };
 }
 
-async function searchTeam() {
-  const response = await fetchWithtoken(`${BASE_URL}/teams`);
+async function searchTeam(keyword) {
+  const response = await fetchWithtoken(`${BASE_URL}/teams/?keyword=${keyword}`);
   const responseJson = await response.json();
 
   if (responseJson.error) {

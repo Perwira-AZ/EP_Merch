@@ -5,9 +5,13 @@ const { addCreatedTeam, addJoinedTeam, getTeams } = require('./userController');
 
 // Get all team
 const searchTeams = async (req, res) => {
-  const filter = req.body;
+  const { keyword } = req.query;
+
   try {
-    const teams = await Team.find(filter);
+    const teams = await Team.find({
+      $or: [{ teamName: { $regex: keyword, $options: 'i' } }, { teamDescription: { $regex: keyword, $options: 'i' } }],
+    });
+
     if (!teams) {
       throw new Error('Failed to search teams');
     }
