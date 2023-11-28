@@ -1,7 +1,7 @@
 import React from 'react';
 import { acceptMember, addNotif } from '../utils/fetch';
 
-function AcceptBox({ toWait, req }) {
+function AcceptBox({ onAccept, toWait, req }) {
   const [message, setMessage] = React.useState(
     `Congratulations ${req.name}, You are accepted to fill position "${req.position}" in our team "${req.teamName}".`
   );
@@ -9,15 +9,15 @@ function AcceptBox({ toWait, req }) {
     setMessage(event.target.value);
   }
 
-  async function onAccept(id, member) {
-    await acceptMember(id);
-    await addNotif({
-      user: member,
-      notifType: 'accepted',
-      notifMessage: message,
-    });
-    toWait();
-  }
+  // async function onAccept(id, member) {
+  //   await acceptMember(id);
+  //   await addNotif({
+  //     user: member,
+  //     notifType: 'accepted',
+  //     notifMessage: message,
+  //   });
+  //   toWait();
+  // }
 
   return (
     <div className="inset-x-0 mx-auto translate-y-2/4 fixed z-[10] accept-box w-[450px] h-[360px] bg-white shadow-lg rounded-3xl">
@@ -37,7 +37,7 @@ function AcceptBox({ toWait, req }) {
 
         <div className="flex gap-3 justify-between mt-3">
           <button
-            onClick={() => onAccept(req.id, req.member)}
+            onClick={() => onAccept(req.id, req.member, message)}
             className="rounded-xl w-44 h-10 p-0 text-white text-normal text-lg bg-gradient-to-l from-blue-500 to-cyan-300 transition ease-in-out duration-150 hover:scale-105 active:scale-100"
           >
             Accept

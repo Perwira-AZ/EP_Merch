@@ -1,7 +1,7 @@
 import React from 'react';
 import { rejectMember, addNotif } from '../utils/fetch';
 
-function RejectBox({ toWait, req }) {
+function RejectBox({ onReject, toWait, req }) {
   const [message, setMessage] = React.useState(
     `Sorry ${req.name}, we have to reject you for position "${req.position}" in "${req.teamName}". Good luck next time.`
   );
@@ -9,16 +9,15 @@ function RejectBox({ toWait, req }) {
     setMessage(event.target.value);
   }
 
-  async function onReject(id, member) {
-    await rejectMember(id);
-    console.log('test');
-    await addNotif({
-      user: member,
-      notifType: 'rejected',
-      notifMessage: message,
-    });
-    toWait();
-  }
+  // async function onReject(id, member) {
+  //   await rejectMember(id);
+  //   await addNotif({
+  //     user: member,
+  //     notifType: 'rejected',
+  //     notifMessage: message,
+  //   });
+  //   toWait();
+  // }
 
   return (
     <div className="inset-x-0 mx-auto translate-y-2/4 fixed z-[10] accept-box w-[450px] h-[360px] bg-white shadow-lg rounded-3xl">
@@ -37,7 +36,7 @@ function RejectBox({ toWait, req }) {
         />
         <div className="flex gap-3 justify-between mt-3">
           <button
-            onClick={() => onReject(req.id, req.member)}
+            onClick={() => onReject(req.id, req.member, message)}
             className="rounded-xl w-44 h-10 p-0 text-white text-normal text-lg bg-gradient-to-l from-red-500 to-red-600 transition ease-in-out duration-150 hover:scale-105 active:scale-100"
           >
             Reject

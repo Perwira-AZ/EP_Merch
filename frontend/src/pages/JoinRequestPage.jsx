@@ -1,5 +1,5 @@
 import React from 'react';
-import { viewRequests } from '../utils/fetch';
+import { viewRequests, acceptMember, rejectMember, addNotif } from '../utils/fetch';
 import JoinRequestList from '../components/JoinRequestList';
 import Cover from '../components/Cover';
 import AcceptBox from '../components/AcceptBox';
@@ -21,6 +21,44 @@ function JoinRequestPage() {
         setIsLoading(false); // Set loading to false in case of an error
       });
   }, []);
+
+  async function onAccept(id, member, message) {
+    await acceptMember(id);
+    await addNotif({
+      user: member,
+      notifType: 'accepted',
+      notifMessage: message,
+    });
+    await viewRequests()
+      .then(({ data }) => {
+        setJoinReq(data);
+        setIsLoading(false); // Set loading to false after data is fetched
+      })
+      .catch(({ error }) => {
+        console.error('Error fetching data:', error);
+        setIsLoading(false); // Set loading to false in case of an error
+      });
+    changeWaiting();
+  }
+
+  async function onReject(id, member, message) {
+    await rejectMember(id);
+    await addNotif({
+      user: member,
+      notifType: 'rejected',
+      notifMessage: message,
+    });
+    await viewRequests()
+      .then(({ data }) => {
+        setJoinReq(data);
+        setIsLoading(false); // Set loading to false after data is fetched
+      })
+      .catch(({ error }) => {
+        console.error('Error fetching data:', error);
+        setIsLoading(false); // Set loading to false in case of an error
+      });
+    changeWaiting();
+  }
 
   function changeAccept(req) {
     setIdle({
@@ -48,12 +86,12 @@ function JoinRequestPage() {
       {idle.status === 'accepting' ? (
         <div>
           <Cover />
-          <AcceptBox toWait={changeWaiting} req={idle.req} />
+          <AcceptBox onAccept={onAccept} req={idle.req} />
         </div>
       ) : idle.status === 'rejecting' ? (
         <div>
           <Cover />
-          <RejectBox toWait={changeWaiting} req={idle.req} />
+          <RejectBox onReject={onReject} req={idle.req} />
         </div>
       ) : null}
 
