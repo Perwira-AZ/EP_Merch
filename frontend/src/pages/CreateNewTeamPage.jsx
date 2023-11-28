@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { selectProvince, selectCity } from '../utils/location';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 // import { get } from 'mongoose';
 import { createTeam } from '../utils/fetch';
 import PositionCard from '../components/PositionCard';
@@ -8,8 +8,10 @@ import PositionCard from '../components/PositionCard';
 function CreateNewTeamPage() {
   const provinceList = selectProvince();
   const [cityList, setCityList] = React.useState(selectCity('Aceh'));
-  const [teamDetail, setTeamDetail] = React.useState({ teamLocation: { province: provinceList[0] } });
+  const [teamDetail, setTeamDetail] = React.useState({ teamLocation: { province: provinceList[0], city: cityList[0] } });
   const [members, setMembers] = React.useState([{ role: '', description: '', idx: 0 }]);
+
+  const navigate = useNavigate();
 
   function onTeamNameChange(event) {
     setTeamDetail((prevState) => ({
@@ -116,11 +118,11 @@ function CreateNewTeamPage() {
 
   async function onCreateTeam() {
     const response = await createTeam({ ...teamDetail });
-    if (response.data) {
-      console.log(response.data);
-      setTeamDetail({ teamLocation: { province: provinceList[0] } });
+    if (!response.error) {
+      alert('Team Created!');
+      navigate('/myteam');
     } else {
-      console.log(response.error);
+      alert(`Team Creation Failed! ${response.data}`);
     }
   }
 
