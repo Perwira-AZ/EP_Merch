@@ -1,7 +1,7 @@
 const Team = require('../models/teamModel');
 const User = require('../models/userModel');
 const mongoose = require('mongoose');
-const { addCreatedTeam, addJoinedTeam, getTeams } = require('./userController');
+const { addCreatedTeam, addJoinedTeam, getTeams, deleteCreatedTeam, deleteJoinedTeam } = require('./userController');
 
 // Get all team
 const searchTeams = async (req, res) => {
@@ -118,6 +118,14 @@ const deleteTeam = async (req, res) => {
     if (!team) {
       throw new Error("Team doesn't exist");
     }
+
+    await deleteCreatedTeam(user, id);
+
+    await Promise.all(
+      team.teamMember.map(async (member) => {
+        await deleteJoinedTeam(member.member, id);
+      })
+    );
 
     res.status(200).json(team);
   } catch (err) {
