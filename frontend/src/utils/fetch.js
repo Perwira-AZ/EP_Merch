@@ -46,7 +46,7 @@ async function login({ userEmail, password }) {
   const responseJson = await response.json();
 
   if (responseJson.error) {
-    return { error: true, data: null };
+    return { error: responseJson.error, data: null };
   } else {
     setToken(responseJson.token);
     return { error: false, data: responseJson };

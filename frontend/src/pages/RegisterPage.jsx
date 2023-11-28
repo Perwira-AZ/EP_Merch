@@ -1,6 +1,6 @@
-import React from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { register } from "../utils/fetch";
+import React from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import { register } from '../utils/fetch';
 
 function RegisterPage() {
   const [user, setUser] = React.useState();
@@ -25,7 +25,7 @@ function RegisterPage() {
   function onEmailChange(event) {
     setUser((prevState) => ({
       ...prevState,
-      userEmail: event.target.value,
+      userEmail: event.target.value.toLowerCase(),
     }));
   }
 
@@ -43,17 +43,17 @@ function RegisterPage() {
   async function onSubmitHandler(event) {
     event.preventDefault();
     if (!user.userName || !user.userEmail || !user.password || !confirmPassword) {
-      alert("Please fill all the fields");
+      alert('Please fill all the fields');
       return;
     } else if (user.password !== confirmPassword) {
-      alert("Password confirmation does not match");
+      alert('Password confirmation does not match');
       return;
     } else {
       const response = await register(user);
       console.log(response);
       if (!response.error) {
-        alert("Register success");
-        navigate("/login");
+        alert('Register success');
+        navigate('/login');
       } else {
         alert(response.data);
       }

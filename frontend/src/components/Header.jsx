@@ -1,11 +1,11 @@
-import React from "react";
-import { TbLogout } from "react-icons/tb";
-import { IoNotificationsSharp } from "react-icons/io5";
-import TeamUP from "../assets/Team.png";
-import { Link } from "react-router-dom";
-import { logout } from "../utils/fetch";
+import React from 'react';
+import { TbLogout } from 'react-icons/tb';
+import { IoNotificationsSharp } from 'react-icons/io5';
+import TeamUP from '../assets/Team.png';
+import { Link } from 'react-router-dom';
+import { logout } from '../utils/fetch';
 
-function Header({ clickNotif }) {
+function Header({ clickNotif, onLogout }) {
   return (
     <header className="z-[100] bg-blue-500 shadow fixed top-0 left-0 h-[60px] w-full box-border flex flex-row justify-between items-center px-6">
       <div className="header__logo">
@@ -29,7 +29,7 @@ function Header({ clickNotif }) {
         <button className="mx-2 px-0 pb-0 pt-2" onClick={() => clickNotif()}>
           <IoNotificationsSharp />
         </button>
-        <button className="mx-2 px-0 pb-0 pt-2" onClick={logout}>
+        <button className="mx-2 px-0 pb-0 pt-2" onClick={onLogout}>
           <TbLogout />
         </button>
       </div>

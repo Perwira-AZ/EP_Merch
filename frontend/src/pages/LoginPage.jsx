@@ -1,31 +1,32 @@
-import React from "react";
-import Logo from "../assets/Team UP Logo.svg";
+import React from 'react';
+import Logo from '../assets/Team UP Logo.svg';
 
 function LoginPage({ onLogin }) {
-  // function LoginPage({ onLogin }) {
-  // const [user, setUser] = React.useState({
-  //   userEmail: "",
-  //   password: "",
-  // });
+  const [user, setUser] = React.useState({
+    userEmail: '',
+    password: '',
+  });
 
-  // function onEmailChange(event) {
-  //   setUser((prevState) => ({
-  //     ...prevState,
-  //     userEmail: event.target.value,
-  //   }));
-  // }
+  function onEmailChange(event) {
+    console.log(user);
+    setUser((prevState) => ({
+      ...prevState,
+      userEmail: event.target.value.toLowerCase(),
+    }));
+  }
 
-  // function onPasswordChange(event) {
-  //   setUser((prevState) => ({
-  //     ...prevState,
-  //     password: event.target.value,
-  //   }));
-  // }
+  function onPasswordChange(event) {
+    console.log(user);
+    setUser((prevState) => ({
+      ...prevState,
+      password: event.target.value,
+    }));
+  }
 
-  // function onSubmitHandler(event) {
-  //   event.preventDefault();
-  //   onLogin(user);
-  // }
+  function onSubmitHandler(event) {
+    event.preventDefault();
+    onLogin(user);
+  }
 
   return (
     <div className="h-screen bg-white flex-row justify-center items-center w-full pt-[120px] pt-[120px]">
@@ -40,7 +41,7 @@ function LoginPage({ onLogin }) {
                 Create <br /> the Best TEAM <br /> For Your Project
               </p>
             </div>
-            <img src={Logo} alt="" className="h-9" style={{ width: "233px", height: "233px" }} />
+            <img src={Logo} alt="" className="h-9" style={{ width: '233px', height: '233px' }} />
           </div>
           <p className="text-stone-300 text-sm mt-2">Don't Have an Account?</p>
           <button className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:shadow-lg flex items-center">
@@ -57,8 +58,8 @@ function LoginPage({ onLogin }) {
                 </div>
                 <div className="w-1/2 pl-4">
                   <p className="text-white text-sm">
-                    The TeamUP Platform is a collaborative space dedicated to helping individuals and teams achieve success in their projects. We provide seamless tools and resources to make
-                    collaboration easy and effective.
+                    The TeamUP Platform is a collaborative space dedicated to helping individuals and teams achieve success in their projects. We provide
+                    seamless tools and resources to make collaboration easy and effective.
                   </p>
                 </div>
               </div>
@@ -69,43 +70,37 @@ function LoginPage({ onLogin }) {
         <div className="flex flex-col items-center flex-1">
           <div className="bg-gradient-to-r from-blue-500 to-cyan-300 rounded-[20px] shadow rounded p-4 text-left flex-1 rounded p-4 mb-4 shadow">
             <div className="bg-white rounded-[20px] p-4 flex flex-col items-center">
-              <form className="mb-4">
+              <form className="mb-4" onSubmit={onSubmitHandler}>
                 <h2 className="text-indigo-950 text-lg font-semibold mb-4 items-center text-center">Login To Your Account</h2>
 
-                <div className="mb-4">
-                  <label htmlFor="username" className="text-sm">
-                    Username
+                <div className="mb-2">
+                  <label htmlFor="email" className="text-sm">
+                    Email
                   </label>
-                  <div className="w-[300px] h-[42px] bg-white rounded-[4.92px] shadow">
-                    <input type="text" id="username" placeholder="Enter your username" className="input-field" />
-                  </div>
+                  <input
+                    onChange={onEmailChange}
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    className="input-field w-full h-[42px] bg-white rounded-[4.92px] shadow"
+                  />
                 </div>
 
-                <div className="mb-4">
+                <div className="mb-4 min-[350px]:w-[300px]">
                   <label htmlFor="password" className="text-sm">
                     Password
                   </label>
-                  <div className="w-[300px] h-[42px] bg-white rounded-[4.92px] shadow">
-                    <input type="password" id="password" placeholder="Enter your password" className="input-field" />
-                  </div>
+                  <input
+                    onChange={onPasswordChange}
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    className="input-field w-full h-[42px] bg-white rounded-[4.92px] shadow"
+                  />
                 </div>
 
-                <div className="flex items-center justify-between mb-4">
-                  {/* Checkbox for "Remember me" */}
-                  <div className="flex items-center">
-                    <input type="checkbox" id="rememberMe" className="mr-2" />
-                    <label htmlFor="rememberMe" className="text-sm">
-                      Remember me
-                    </label>
-                  </div>
-
-                  {/* "Forgot your password?" link */}
-                  <a href="#" className="text-sm text-indigo-500">
-                    Forgot your password?
-                  </a>
-                </div>
-                <button className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:shadow-lg flex justify-center w-full">
-                  <p>Login</p>
+                <button className="bg-blue-500 text-white text-sm px-4 py-2 rounded hover:shadow-lg flex justify-center w-full" type="submit">
+                  Login
                 </button>
               </form>
             </div>

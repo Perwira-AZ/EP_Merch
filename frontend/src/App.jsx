@@ -1,6 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
-import { login, getUserLoggedIn } from './utils/fetch';
+import { login, getUserLoggedIn, logout } from './utils/fetch';
 import Header from './components/Header';
 import LoginPage from './pages/LoginPage';
 import MyTeamPage from './pages/MyTeamPage';
@@ -28,7 +28,14 @@ function App() {
       getUserLoggedIn().then((data) => {
         setUser(data);
       });
+    } else {
+      alert(response.error);
     }
+  }
+
+  function onLogout() {
+    logout();
+    setUser(null);
   }
 
   function clickNotif() {
@@ -37,15 +44,15 @@ function App() {
 
   return (
     <div className="app-container min-h-screen">
-      <Header clickNotif={clickNotif} />
+      <Header clickNotif={clickNotif} onLogout={onLogout} />
       {viewNotif === true ? <NotificationBar /> : null}
       <Routes>
         <Route path="/" element={<LoginPage onLogin={onLogin} />} />
         <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
-        <Route path="/myteam" element={<MyTeamPage />} />
-        <Route path="/joinrequest" element={<JoinRequestPage />} />
+        <Route path="/myteam" element={user ? <MyTeamPage /> : <LoginPage onLogin={onLogin} />} />
+        <Route path="/joinrequest" element={user ? <JoinRequestPage /> : <LoginPage onLogin={onLogin} />} />
         <Route path="/exploreteam" element={<ExploreTeamPage />} />
-        <Route path="/createnewteam" element={<CreateNewTeamPage />} />
+        <Route path="/createnewteam" element={user ? <CreateNewTeamPage /> : <LoginPage onLogin={onLogin} />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </div>
