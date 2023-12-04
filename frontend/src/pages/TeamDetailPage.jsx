@@ -1,4 +1,5 @@
 import React from "react";
+import PositionCardDetail from "../components/PositionCardDetail";
 
 function TeamDetailPage() {
   return (
@@ -48,6 +49,18 @@ function TeamDetailPage() {
         {/* Member Section */}
         <h2 className="text-2xl font-bold mb-4">Members</h2>
         {/* <MemberList /> */}
+        <div className="flex flex-col">
+          <PositionCardDetail positionName="Developer" detail="Lorem ipsum dolor sit amet, consectetur adipiscing elit." onJoinClick={() => console.log("Join Developer")} />
+          <PositionCardDetail
+            positionName="Designer"
+            detail="Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
+            onJoinClick={() => console.log("Join Designer")}
+          />
+          {/* Add more cards as needed */}
+        </div>
+        <button className="rounded-xl w-44 h-10 p-0 text-white text-normal text-lg bg-gradient-to-l from-red-500 to-red-600 transition ease-in-out duration-150 hover:scale-105 active:scale-100">
+          <p className="text-sm">Delete Team</p>
+        </button>
       </div>
     </div>
   );
