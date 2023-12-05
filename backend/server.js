@@ -7,6 +7,7 @@ const http = require('http');
 const userRoutes = require('./routes/userRoutes');
 const teamRoutes = require('./routes/teamRoutes');
 const notifRoutes = require('./routes/notifRoutes');
+const { deleteNotif } = require('./controllers/notifController');
 
 const app = express();
 
@@ -22,27 +23,7 @@ app.use((req, res, next) => {
 });
 
 const autoDelete = () => {
-  const options = {
-    hostname: 'localhost', // Change this to your server's hostname or IP address
-    port: process.env.PORT,
-    path: '/api/notif/deleteNotif',
-    method: 'DELETE',
-  };
-
-  const request = http.request(options, (response) => {
-    let data = '';
-    response.on('data', (chunk) => {
-      data += chunk;
-    });
-    response.on('end', () => {
-      console.log('API Response:', data);
-    });
-  });
-
-  request.on('error', (error) => {
-    console.error('Error making API call:', error.message);
-  });
-  request.end();
+  deleteNotif();
 };
 
 setInterval(autoDelete, 24 * 60 * 60 * 1000);

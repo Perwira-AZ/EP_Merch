@@ -4,9 +4,6 @@ const requireAuth = require('../middleware/requireAuth');
 
 const router = express.Router();
 
-//delete notif
-router.delete('/deleteNotif', deleteNotif);
-
 // require auth for notif routes
 router.use(requireAuth);
 
