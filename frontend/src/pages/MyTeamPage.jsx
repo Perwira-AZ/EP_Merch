@@ -32,12 +32,12 @@ function MyTeamPage() {
                 </button>
               </Link>
             </div>
-            {isLoading ? <p>Loading...</p> : myTeam != null && myTeam.myTeamCreated.length ? <TeamList teams={myTeam.myTeamCreated} /> : <p>No Team</p>}
-            <Link to="/createnewteam" className="w-full">
-              <button className="w-full h-12 transition ease-in-out duration-100 bg-indigo-950 hover:scale-[1.02] active:scale-[1.005] rounded-xl text-white text-lg">
+            <Link to="/createnewteam" className="w-full mb-5">
+              <button className="w-full h-12 transition ease-in-out duration-100 bg-indigo-950 hover:scale-[1.02] active:scale-[1.005] rounded-xl text-white text-lg mb-5">
                 + Create New Team
               </button>
             </Link>
+            {isLoading ? <p>Loading...</p> : myTeam != null && myTeam.myTeamCreated.length ? <TeamList teams={myTeam.myTeamCreated} /> : <p>No Team</p>}
           </div>
           <div className="joined-team">
             <h2 className="pt-11 mb-7 text-indigo-950 text-[45px] font-bold leading-[34px]">Joined Team</h2>

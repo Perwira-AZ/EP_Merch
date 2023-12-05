@@ -78,14 +78,19 @@ async function getMyTeam() {
   return { error: false, data: responseJson };
 }
 
-async function createTeam({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember }) {
+async function createTeam({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamLogo, teamMember }) {
   const response = await fetchWithtoken(`${BASE_URL}/teams`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember }),
+    body: JSON.stringify({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamLogo, teamMember }),
   });
+  const jsonString = JSON.stringify({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamLogo, teamMember });
+  const textEncoder = new TextEncoder();
+  const jsonSizeInBytes = textEncoder.encode(jsonString).length;
+
+  console.log(jsonSizeInBytes);
   const responseJson = await response.json();
 
   if (responseJson.error) {

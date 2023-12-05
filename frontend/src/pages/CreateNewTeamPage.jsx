@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { selectProvince, selectCity } from '../utils/location';
 import { useNavigate } from 'react-router-dom';
 // import { get } from 'mongoose';
+import DefaultLogo from '../assets/Team UP Logo.svg';
 import { createTeam } from '../utils/fetch';
 import PositionCard from '../components/PositionCard';
 
@@ -10,6 +11,7 @@ function CreateNewTeamPage() {
   const [cityList, setCityList] = React.useState(selectCity('Aceh'));
   const [teamDetail, setTeamDetail] = React.useState({ teamLocation: { province: provinceList[0], city: cityList[0] } });
   const [members, setMembers] = React.useState([{ role: '', description: '', idx: 0 }]);
+  const [teamLogo, setTeamLogo] = React.useState(DefaultLogo);
 
   const navigate = useNavigate();
 
@@ -99,6 +101,24 @@ function CreateNewTeamPage() {
       teamMember: members.map((member) => ({ position: member.role, description: member.description })),
     }));
   }, [members]);
+
+  function toBase64(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    if (file.size / 1024 / 1024 <= 1) {
+      reader.readAsDataURL(file);
+      reader.onloadend = () => {
+        setTeamDetail((prevState) => ({
+          ...prevState,
+          teamLogo: reader.result,
+        }));
+        setTeamLogo(reader.result);
+      };
+    } else {
+      alert('File size must be less than 1MB');
+    }
+  }
 
   function onAddMember() {
     setMembers((prevState) => {
@@ -214,7 +234,10 @@ function CreateNewTeamPage() {
               <label htmlFor="teamLogo" className="block text-sm font-medium text-gray-700">
                 Team Logo
               </label>
-              <input type="file" id="teamLogo" name="teamLogo" accept="image/*" className="mt-1 p-2 w-full border rounded-md" />
+              <div className="mt-1 p-2 w-full border rounded-md">
+                <img src={teamLogo} alt="" className="h-40 mx-auto mb-4" Style="clip-path: circle(72px)" />
+                <input type="file" id="teamLogo" name="teamLogo" accept="image/*" className="mt-1 p-2 w-full border rounded-md bg-white" onChange={toBase64} />
+              </div>
             </div>
 
             {/* Team Members */}

@@ -36,7 +36,7 @@ const getTeam = async (req, res) => {
       throw new Error("Team doesn't exist");
     }
 
-    const team = await Team.findById(id, 'teamName teamLeader teamLocation teamStart teamEnd teamCompetition teamDescription teamMember');
+    const team = await Team.findById(id, 'teamName teamLeader teamLocation teamStart teamEnd teamCompetition teamDescription teamLogo teamMember');
     if (!team) {
       throw new Error("Team doesn't exist");
     }
@@ -62,12 +62,12 @@ const getMyTeams = async (req, res) => {
 
     const getCreatedTeam = await Promise.all(
       createdTeam.map(async (team_id) => {
-        return await Team.findById(team_id, 'teamName teamCompetition teamLocation teamStart teamEnd');
+        return await Team.findById(team_id, 'teamName teamCompetition teamLocation teamStart teamEnd teamLogo');
       })
     );
     const getJoinedTeam = await Promise.all(
       joinedTeam.map(async (team_id) => {
-        return await Team.findById(team_id, 'teamName teamCompetition teamLocation teamStart teamEnd');
+        return await Team.findById(team_id, 'teamName teamCompetition teamLocation teamStart teamEnd teamLogo');
       })
     );
 
@@ -80,10 +80,10 @@ const getMyTeams = async (req, res) => {
 // Create new team
 const createTeam = async (req, res) => {
   const teamLeader = req.user._id;
-  const { teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember } = req.body;
+  const { teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamLogo, teamMember } = req.body;
 
   try {
-    const team = await Team.create({ teamName, teamLeader, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamMember });
+    const team = await Team.create({ teamName, teamLeader, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamLogo, teamMember });
     if (!team) {
       throw new Error('Failed to create team');
     }
@@ -93,7 +93,7 @@ const createTeam = async (req, res) => {
       throw new Error('Failed to create team');
     }
 
-    res.status(200).json(team);
+    res.status(200).json('Success');
   } catch (err) {
     res.status(400).json({ error: err.message });
   }

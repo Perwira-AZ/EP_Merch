@@ -10,7 +10,6 @@ function LoginPage({ onLogin }) {
   });
 
   function onEmailChange(event) {
-    console.log(user);
     setUser((prevState) => ({
       ...prevState,
       userEmail: event.target.value.toLowerCase(),
