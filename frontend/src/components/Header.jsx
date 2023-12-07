@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
-import { TbLogout } from 'react-icons/tb';
-import { IoNotificationsSharp } from 'react-icons/io5';
-import TeamUP from '../assets/Team.png';
-import { Link } from 'react-router-dom';
-import { logout } from '../utils/fetch';
+import React, { useState } from "react";
+import { TbLogout } from "react-icons/tb";
+import { IoNotificationsSharp } from "react-icons/io5";
+import TeamUP from "../assets/Team UP Logo BnW.png";
+import { Link } from "react-router-dom";
+import { logout } from "../utils/fetch";
 
 function Header({ onLogout, clickNotif }) {
-  const [activeMenuItem, setActiveMenuItem] = useState('');
+  const [activeMenuItem, setActiveMenuItem] = useState("");
 
   const handleMenuItemClick = (menuItem) => {
     setActiveMenuItem(menuItem);
@@ -18,20 +18,16 @@ function Header({ onLogout, clickNotif }) {
         <img src={TeamUP} alt="" className="h-9" />
       </div>
       <ul className="header__menu flex flex-row justify-center gap-x-5 font-medium list-none">
-        <Link to="/" className={`text-white ${activeMenuItem === 'Home' ? 'underline' : ''}`} onClick={() => handleMenuItemClick('Home')}>
+        <Link to="/" className={`text-white ${activeMenuItem === "Home" ? "underline" : ""}`} onClick={() => handleMenuItemClick("Home")}>
           <li>Home</li>
         </Link>
-        <Link to="/myteam" className={`text-white ${activeMenuItem === 'MyTeam' ? 'underline' : ''}`} onClick={() => handleMenuItemClick('MyTeam')}>
+        <Link to="/myteam" className={`text-white ${activeMenuItem === "MyTeam" ? "underline" : ""}`} onClick={() => handleMenuItemClick("MyTeam")}>
           <li>My Team</li>
         </Link>
-        <Link
-          to="/exploreteam"
-          className={`text-white ${activeMenuItem === 'ExploreTeam' ? 'underline' : ''}`}
-          onClick={() => handleMenuItemClick('ExploreTeam')}
-        >
+        <Link to="/exploreteam" className={`text-white ${activeMenuItem === "ExploreTeam" ? "underline" : ""}`} onClick={() => handleMenuItemClick("ExploreTeam")}>
           <li>Explore Team</li>
         </Link>
-        <Link to="/profile" className={`text-white ${activeMenuItem === 'Profile' ? 'underline' : ''}`} onClick={() => handleMenuItemClick('Profile')}>
+        <Link to="/profile" className={`text-white ${activeMenuItem === "Profile" ? "underline" : ""}`} onClick={() => handleMenuItemClick("Profile")}>
           <li>Profile</li>
         </Link>
       </ul>
