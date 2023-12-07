@@ -4,7 +4,8 @@
 </p>
 
 ## 📌About TeamUp
-TeamUp is a Web based application that can help users to create and find a great team for joining competitions. [Click here](https://team-up-paw.vercel.app/) to experience the ease of teaming up.
+TeamUp is a Web based application that can help users to create and find a great team for joining competitions. <br>
+[Click here](https://team-up-paw.vercel.app/) to experience the ease of teaming up.
 
 ## 👩‍💻Meet Our Team
 1. Mochammad Novaldy Pratama Hakim (20/463606/TK/51598)
