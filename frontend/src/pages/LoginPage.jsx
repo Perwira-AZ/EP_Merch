@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Team UP Logo.svg';
 import features1 from '../assets/features1.png';
 
@@ -8,6 +8,7 @@ function LoginPage({ onLogin }) {
     userEmail: '',
     password: '',
   });
+  const navigate = useNavigate();
 
   function onEmailChange(event) {
     setUser((prevState) => ({
@@ -26,6 +27,7 @@ function LoginPage({ onLogin }) {
   function onSubmitHandler(event) {
     event.preventDefault();
     onLogin(user);
+    navigate('/myteam');
   }
 
   return (

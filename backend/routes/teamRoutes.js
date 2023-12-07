@@ -1,14 +1,15 @@
 const express = require('express');
 const {
-    searchTeams,
-    getTeam,
-    getMyTeams,
-    createTeam,
-    deleteTeam,
-    createRequest,
-    viewRequest,
-    acceptMember,
-    rejectMember,
+  searchTeams,
+  getTeam,
+  getMyTeams,
+  getPeopleTeams,
+  createTeam,
+  deleteTeam,
+  createRequest,
+  viewRequest,
+  acceptMember,
+  rejectMember,
 } = require('../controllers/teamController');
 const requireAuth = require('../middleware/requireAuth');
 
@@ -19,6 +20,9 @@ router.get('/', searchTeams);
 
 // GET a single team
 router.get('/teamDetail/:id', getTeam);
+
+// GET owned team
+router.get('/teamList/:id', getPeopleTeams);
 
 // require auth for team routes
 router.use(requireAuth);

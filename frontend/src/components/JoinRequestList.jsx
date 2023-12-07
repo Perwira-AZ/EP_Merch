@@ -6,7 +6,7 @@ function JoinRequestList({ requests, accept, reject }) {
   return (
     <div className="join-request__list flex flex-col">
       {requests.map((request) => (
-        <JoinRequestItem key={request.id} request={request} accept={accept} reject={reject} />
+        <JoinRequestItem key={request.id} member={request.member} request={request} accept={accept} reject={reject} />
       ))}
     </div>
   );

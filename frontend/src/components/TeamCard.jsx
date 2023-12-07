@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { formatDate } from '../utils/date';
-import teamImage from '../assets/Team.png';
+import teamImage from '../assets/Team UP Logo.svg';
 
 function TeamCard({ team }) {
   const startDate = formatDate(team.teamStart);

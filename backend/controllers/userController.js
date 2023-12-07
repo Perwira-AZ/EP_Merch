@@ -15,7 +15,7 @@ const getUser = async (req, res) => {
       throw new Error("User doesn't exist");
     }
 
-    const user = await User.findById(id, 'name userName userEmail team');
+    const user = await User.findById(id, 'name userName userEmail profilePict team');
 
     if (!user) {
       throw new Error("User doesn't exist");
