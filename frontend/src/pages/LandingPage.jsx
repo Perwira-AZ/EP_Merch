@@ -1,50 +1,92 @@
-import React from 'react';
-import features1 from '../assets/features1.png';
-import features2 from '../assets/features2.png';
-import features3 from '../assets/features3.png';
-import logo from '../assets/Team UP Logo.svg';
+import React from "react";
+import logo from "../assets/Team UP Logo.svg";
+import features1 from "../assets/features1.png";
+import features2 from "../assets/features2.png";
+import features3 from "../assets/features3.png";
 
-function LandingPage() {
+const scrollToPlatformFeatures = () => {
+  const platformFeaturesElement = document.getElementById("platform-features");
 
+  if (platformFeaturesElement) {
+    const navbarHeight = 80; // Sesuaikan dengan tinggi navbar Anda
+    const offsetTop = platformFeaturesElement.offsetTop - navbarHeight;
+
+    window.scrollTo({ top: offsetTop, behavior: "smooth" });
+  }
+};
+
+const LandingPage = () => {
   return (
-    <div className="w-full p-[60px] bg-gradient-to-b from-cyan-300 flex-col flex items-center to-blue-500 gap-10">
-        <div className="w-[1306px] h-[472px] justify-between flex-row flex items-center relative">
-            <div className="flex flex-col text-left align-center items-center gap-5">
-                <div className="text-indigo-950 text-[74.89px] font-bold font-['Poppins'] leading-[106.58px]">Create the Best TEAM
-                <br/>For Your Project</div>
-                <div className="w-[806px] text-justify text-indigo-950 text-3xl font-normal font-['Poppins'] leading-[43.79px]">The TeamUP platform will facilitate you in getting your dream team. Join the team you are interested in or create your own team and find members who suit your team's needs</div>
+    <div className="bg-gradient-to-b from-cyan-300 to-blue-500 min-h-screen flex flex-col items-center justify-center p-20">
+      {/* Header Section */}
+      <div className="mt-20">
+        <div className="max-w-6xl flex items-center justify-between">
+          <div className="text-indigo-950 text-4xl font-bold font-Poppins leading-tight">
+            Create the BEST TEAM <br /> For Your Project
+            <div className="text-indigo-950 text-base font-normal font-Poppins leading-6 text-left mt-2 max-w-[450px]">
+              The TeamUP platform will facilitate you in getting your dream team. Join the team you are interested in or create your own team and find members who suit your team's needs
             </div>
-                <img className="w-[353px] h-[458px]" src={logo} />
+          </div>
+          <img className="w-48 h-48" src={logo} alt="Team UP Logo" />
         </div>
-        <div className="text-neutral-50 text-[74.89px] font-bold font-['Poppins'] leading-[106.58px]">Platform Features</div>
-        <div className="w-[1604px] h-[451px] justify-between flex-row flex items-center w-[1800px] relative">
-            <div className="flex flex-col text-center align-center gap-5">
-                <div className="text-neutral-50 text-[68.96px] font-semibold font-['Poppins'] leading-[98.14px]">Create and Manage Teams</div>
-                <div className="w-full text-center text-neutral-50 text-3xl font-medium font-['Poppins'] leading-[42.96px]">Create a Team According to Your Preferences and Based on Positions Needed. Reject or Accept Join Requests From Applicants and Become a Manager</div>
+        <div className="mt-5 mb-20">
+          <a href="#platform-features" onClick={scrollToPlatformFeatures}>
+            {" "}
+            <button className="rounded-xl w-44 h-10 p-0 mb-5 text-white text-normal text-sm bg-indigo-950 -10 transition ease-in-out duration-150 hover:scale-105 active:scale-100">Know More</button>
+          </a>
+        </div>
+      </div>
+      <div className="min-h-screen flex flex-col items-center justify-center p-20">
+        {/* Platform Features Section */}
+        <div id="platform-features" className="text-neutral-50 text-4xl font-semibold font-Poppins leading-tight mb-10">
+          Platform Features
+        </div>
+
+        {/* Feature 1 */}
+        <div className="max-w-6xl flex items-center justify-between mb-10">
+          <div className="flex flex-col text-center mr-20">
+            <div className="text-neutral-50 text-3xl font-semibold font-Poppins leading-8 mb-5">Create and Manage Teams</div>
+            <div className="text-neutral-50 text-base font-regular font-Poppins leading-8 max-w-[400px]">
+              Create a Team According to Your Preferences and Based on Positions Needed. Reject or Accept Join Requests From Applicants and Become a Manager
             </div>
-            <img className="w-[660px] h-[451px]" src={features1} />
+          </div>
+          <img className="w-96 h-64" src={features1} alt="Create and Manage Teams" />
         </div>
-        <div className="w-[1439px] h-[534px] justify-between flex-row items-center flex relative">
-            <img className="w-[546px] h-[534px]" src={features2} />
-            <div className="flex flex-col text-center align-center gap-5">
-                <div className="text-neutral-50 text-[68.96px] font-semibold font-['Poppins'] leading-[98.14px]">Explore Another Teams</div>
-                <div className="w-[788px] text-center text-neutral-50 text-3xl font-medium font-['Poppins'] leading-[42.96px]">Look for and join other teams according to the project you want to participate in, and work according to the specified time contract</div>
+
+        {/* Feature 2 */}
+        <div className="max-w-6xl flex items-center justify-between mb-10">
+          <img className="w-80 h-70" src={features2} alt="Explore Another Teams" />
+          <div className="flex flex-col text-center ml-20">
+            <div className="text-neutral-50 text-3xl font-semibold font-Poppins leading-8 mb-5">Explore Another Teams</div>
+            <div className="text-neutral-50 text-base font-regular font-Poppins leading-8 max-w-[400px]">
+              Look for and join other teams according to the project you want to participate in, and work according to the specified time contract
             </div>
+          </div>
         </div>
-        <div className="w-[1449px] h-[637px] justify-between flex-row flex items-center relative">
-            <div className="flex flex-col text-center align-center gap-5">
-                <div className="text-neutral-50 text-[68.96px] font-semibold font-['Poppins'] leading-[98.14px]">Customize Your Profile</div>
-                <div className="w-[812px] text-center text-neutral-50 text-3xl font-medium font-['Poppins'] leading-[42.96px]">Show Your Personal Branding Through Your Profile to Increase the Probability of Being Accepted in the Team</div>
+
+        {/* Feature 3 */}
+        <div className="max-w-6xl flex items-center justify-between mb-10">
+          <div className="flex flex-col text-center mr-20">
+            <div className="text-neutral-50 text-3xl font-semibold font-Poppins leading-8 mb-5">Customize Your Profile</div>
+            <div className="text-neutral-50 text-base font-regular font-Poppins leading-8 max-w-[400px]">
+              Show Your Personal Branding Through Your Profile to Increase the Probability of Being Accepted in the Team
             </div>
-            <img className="w-[568.75px] h-[564.20px]" src={features3} />
+          </div>
+          <img className="w-96= h-64" src={features3} alt="Customize Your Profile" />
         </div>
-        <div className="w-[556px] h-[339.41px] relative flex flex-col text-center align-center items-center">
-            <div className="flex flex-col text-center align-center">
-                <div className="text-center text-neutral-50 text-[76.63px] font-bold font-['Poppins'] leading-[109.05px]">Let’s Team UP!</div>
-            </div>
-            <img className="w-[150.14px] h-[194.80px]" src={logo} />
+
+        {/* Sign Up Section */}
+        <div className="max-w-6xl flex flex-col items-center mb-10">
+          <button className="bg-white text-indigo-950 text-xl2 font-bold py-3 px-10 rounded-[15px] mb-10 transition ease-in-out duration-150 hover:scale-105 active:scale-100">Sign Up Now!</button>
+          <div className="text-neutral-50 text-4xl font-bold font-Poppins leading-tight mb-4">Let’s Team UP!</div>
         </div>
-    </div>)
-}
+
+        <div className="flex flex-col items-center mb-10">
+          <img className="w-48 h-48 mb-2" src={logo} alt="Team UP" />
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default LandingPage;
