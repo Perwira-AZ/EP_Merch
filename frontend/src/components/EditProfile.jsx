@@ -44,7 +44,6 @@ function EditProfile({ user }) {
   };
 
   return (
-    <div className="p-4">
       <div className="flex flex-col align-center justify-center items-center">
         <h2 className="text-indigo-950 text-4xl font-bold font-['Poppins'] mb-4">Your Profile</h2>
         <div className="avatar-section mb-4 items-center flex flex-col">
@@ -106,8 +105,7 @@ function EditProfile({ user }) {
           </button>
         </div>
       </div>
-    </div>
-  );
+    );
 }
 
 export default EditProfile;
