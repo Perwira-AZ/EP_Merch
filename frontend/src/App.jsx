@@ -1,18 +1,18 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { login, getUserLoggedIn, logout } from "./utils/fetch";
-import Header from "./components/Header";
-import LoginPage from "./pages/LoginPage";
-import ProfilePage from "./pages/ProfilePage";
-import MyTeamPage from "./pages/MyTeamPage";
-import JoinRequestPage from "./pages/JoinRequestPage";
-import ExploreTeamPage from "./pages/ExploreTeamPage";
-import NotificationBar from "./components/NotificationBar";
-import CreateNewTeamPage from "./pages/CreateNewTeamPage";
-import RegisterPage from "./pages/RegisterPage";
-import TeamDetailPage from "./pages/TeamDetailPage";
-import NotFoundPage from "./pages/404";
-import LandingPage from "./pages/LandingPage";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { login, getUserLoggedIn, logout } from './utils/fetch';
+import Header from './components/Header';
+import LoginPage from './pages/LoginPage';
+import ProfilePage from './pages/ProfilePage';
+import MyTeamPage from './pages/MyTeamPage';
+import JoinRequestPage from './pages/JoinRequestPage';
+import ExploreTeamPage from './pages/ExploreTeamPage';
+import NotificationBar from './components/NotificationBar';
+import CreateNewTeamPage from './pages/CreateNewTeamPage';
+import RegisterPage from './pages/RegisterPage';
+import TeamDetailPage from './pages/TeamDetailPage';
+import NotFoundPage from './pages/404';
+import LandingPage from './pages/LandingPage';
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -59,7 +59,7 @@ function App() {
         <Route path="/exploreteam" element={<ExploreTeamPage />} />
         <Route path="/createnewteam" element={user ? <CreateNewTeamPage /> : <LoginPage onLogin={onLogin} />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/team/:id" element={<TeamDetailPage />} />
+        <Route path="/team/:id" element={user ? <TeamDetailPage userID={user._id} /> : <LoginPage onLogin={onLogin} />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

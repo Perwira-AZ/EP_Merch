@@ -5,7 +5,7 @@ import TeamUP from '../assets/Team.png';
 import { Link } from 'react-router-dom';
 import { logout } from '../utils/fetch';
 
-function Header({ clickNotif }) {
+function Header({ onLogout, clickNotif }) {
   const [activeMenuItem, setActiveMenuItem] = useState('');
 
   const handleMenuItemClick = (menuItem) => {
@@ -24,7 +24,11 @@ function Header({ clickNotif }) {
         <Link to="/myteam" className={`text-white ${activeMenuItem === 'MyTeam' ? 'underline' : ''}`} onClick={() => handleMenuItemClick('MyTeam')}>
           <li>My Team</li>
         </Link>
-        <Link to="/exploreteam" className={`text-white ${activeMenuItem === 'ExploreTeam' ? 'underline' : ''}`} onClick={() => handleMenuItemClick('ExploreTeam')}>
+        <Link
+          to="/exploreteam"
+          className={`text-white ${activeMenuItem === 'ExploreTeam' ? 'underline' : ''}`}
+          onClick={() => handleMenuItemClick('ExploreTeam')}
+        >
           <li>Explore Team</li>
         </Link>
         <Link to="/profile" className={`text-white ${activeMenuItem === 'Profile' ? 'underline' : ''}`} onClick={() => handleMenuItemClick('Profile')}>
@@ -35,7 +39,7 @@ function Header({ clickNotif }) {
         <button className="mx-2 px-0 pb-0 pt-2" onClick={() => clickNotif()}>
           <IoNotificationsSharp />
         </button>
-        <button className="mx-2 px-0 pb-0 pt-2" onClick={logout}>
+        <button className="mx-2 px-0 pb-0 pt-2" onClick={onLogout}>
           <TbLogout />
         </button>
       </div>

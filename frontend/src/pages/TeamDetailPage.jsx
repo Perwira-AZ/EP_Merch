@@ -1,16 +1,27 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
-import { getTeamById, requestToJoin } from '../utils/fetch';
+import { useParams, useNavigate } from 'react-router-dom';
+import { getTeamById, deleteTeam, requestToJoin } from '../utils/fetch';
 import { formatDate } from '../utils/date';
 import PositionCardDetail from '../components/PositionCardDetail';
 import Loading from '../components/Loading';
 
-function TeamDetailPage() {
+function TeamDetailPage({ userID }) {
   const { id } = useParams();
   const [team, setTeam] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
 
-  console.log(team);
+  const navigate = useNavigate();
+
+  async function onDeleteTeam(id) {
+    const response = await deleteTeam(id);
+    if (!response.error) {
+      alert('Delete success');
+      navigate('/myteam');
+    } else {
+      alert(response.data);
+    }
+  }
+
   React.useEffect(() => {
     getTeamById(id)
       .then((response) => {
@@ -102,9 +113,14 @@ function TeamDetailPage() {
             ))}
             {/* Add more cards as needed */}
           </div>
-          <button className="rounded-xl w-44 h-10 p-0 mb-5 text-white text-normal text-lg bg-gradient-to-l from-red-500 to-red-600 transition ease-in-out duration-150 hover:scale-105 active:scale-100">
-            <p className="text-sm">Delete Team</p>
-          </button>
+          {userID === team.teamLeaderID ? (
+            <button
+              onClick={() => onDeleteTeam(id)}
+              className="rounded-xl w-44 h-10 p-0 mb-5 text-white text-normal text-lg bg-gradient-to-l from-red-500 to-red-600 transition ease-in-out duration-150 hover:scale-105 active:scale-100"
+            >
+              <p className="text-sm">Delete Team</p>
+            </button>
+          ) : null}
         </div>
       </div>
     );

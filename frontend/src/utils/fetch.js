@@ -73,7 +73,7 @@ async function updateUser(id, userInfo, token) {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`, // Make sure the token is passed correctly
+      Authorization: `Bearer ${token}`, // Make sure the token is passed correctly
     },
     body: JSON.stringify(userInfo),
   });
@@ -88,7 +88,7 @@ async function uploadProfilePict(id, file, token) {
   const response = await fetch(`${BASE_URL}/profile/${id}/profilePict`, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
     body: formData,
   });
@@ -100,7 +100,7 @@ async function deleteProfilePict(id, token) {
   const response = await fetch(`${BASE_URL}/profile/${id}/profilePict`, {
     method: 'DELETE',
     headers: {
-      'Authorization': `Bearer ${token}`,
+      Authorization: `Bearer ${token}`,
     },
   });
   return response.json();
@@ -204,6 +204,18 @@ async function rejectMember(id) {
   return { error: false, data: responseJson };
 }
 
+async function deleteTeam(id) {
+  const response = await fetchWithtoken(`${BASE_URL}/teams/${id}`, {
+    method: 'DELETE',
+  });
+  const responseJson = await response.json();
+
+  if (responseJson.error) {
+    return { error: true, data: responseJson.error };
+  }
+  return { error: false, data: responseJson };
+}
+
 //Notif
 async function addNotif({ user, notifType, notifMessage }) {
   const response = await fetchWithtoken(`${BASE_URL}/notif/newNotif`, {
@@ -245,6 +257,7 @@ export {
   deleteProfilePict,
   getMyTeam,
   getTeamById,
+  deleteTeam,
   viewRequests,
   acceptMember,
   rejectMember,
