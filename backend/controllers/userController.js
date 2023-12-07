@@ -98,7 +98,7 @@ const getUserLoggedIn = async (req, res) => {
       throw new Error("User doesn't exist3");
     }
 
-    const user = await User.findById(id, 'name userName userEmail');
+    const user = await User.findById(id, 'name userName userEmail profilePict');
     if (!user) {
       throw new Error("User doesn't exist2");
     }
