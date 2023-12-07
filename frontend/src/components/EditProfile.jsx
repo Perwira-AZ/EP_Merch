@@ -6,7 +6,7 @@ function EditProfile({ user }) {
   const [fullName, setFullName] = useState(user.name);
   const [username, setUsername] = useState(user.userName);
   const [email, setEmail] = useState(user.userEmail);
-  const [profilePict, setProfilePict] = useState(null);
+  const [profilePict, setProfilePict] = useState(user.profilePict);
 
   // You would also need to define fileInputRef to reference the hidden file input
   const fileInputRef = React.useRef();
@@ -45,20 +45,24 @@ function EditProfile({ user }) {
 
   return (
     <div className="p-4">
-      <div className="flex flex-col items-left">
-        <h2 className="text-indigo-950 text-4xl font-bold font-['Poppins'] leading-7">Your Profile</h2>
-        <div className="avatar-section mb-4">
-          <img src={profilePict || 'path_to_default_avatar_image'} alt="User Avatar" className="w-56 h-56 bg-zinc-300 rounded-full" />
+      <div className="flex flex-col align-center justify-center items-center">
+        <h2 className="text-indigo-950 text-4xl font-bold font-['Poppins'] mb-4">Your Profile</h2>
+        <div className="avatar-section mb-4 items-center flex flex-col">
+          <img
+            src={profilePict || 'path_to_default_avatar_image'}
+            alt="User Avatar"
+            className="w-56 h-56 bg-zinc-300 rounded-full mb-2 border-2 border-blue-500"
+          />
           <input type="file" ref={fileInputRef} className="hidden" onChange={handleProfilePictChange} />
-          <div className="flex flex-col relative">
-            <button onClick={triggerFileInput} className="w-96 h-14 bg-blue-500 rounded-lg">
+          <div className="flex flex-col gap-2">
+            <button onClick={triggerFileInput} className="w-96 h-14 bg-blue-500 rounded-lg font-medium">
               Upload your avatar
             </button>
-            <button className="w-96 h-14 rounded-lg bg-transparent border-2 border-blue-500 text-blue-500 ">Delete avatar</button>
+            <button className="w-96 h-14 rounded-lg bg-white border-2 border-blue-500 text-blue-500 font-medium">Delete avatar</button>
           </div>
         </div>
-        <div className="w-96 h-80 bg-gradient-to-br from-blue-500 to-cyan-300 rounded-3xl shadow">
-          <div className="info-field mb-4">
+        <div className="w-96 h-80 bg-gradient-to-br from-blue-500 to-cyan-300 rounded-3xl shadow flex flex-col items-center p-4">
+          <div className="info-field w-full">
             <label htmlFor="full-name" className="text-sky-50 text-xl font-medium font-['Poppins'] leading-snug">
               Full Name
             </label>
@@ -68,10 +72,10 @@ function EditProfile({ user }) {
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
               placeholder="Full Name"
-              className="w-64 h-10 bg-white rounded shadow"
+              className="h-10 bg-white rounded shadow"
             />
           </div>
-          <div className="info-field mb-4">
+          <div className="info-field w-full">
             <label htmlFor="username" className="text-sky-50 text-xl font-medium font-['Poppins'] leading-snug">
               Username
             </label>
@@ -81,10 +85,10 @@ function EditProfile({ user }) {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
-              className="w-64 h-10 bg-white rounded shadow"
+              className="h-10 bg-white rounded shadow"
             />
           </div>
-          <div className="info-field mb-4">
+          <div className="info-field w-full">
             <label htmlFor="email" className="text-sky-50 text-xl font-medium font-['Poppins'] leading-snug">
               Email
             </label>
@@ -94,10 +98,10 @@ function EditProfile({ user }) {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="Email"
-              className="w-64 h-10 bg-white rounded shadow"
+              className="h-10 bg-white rounded shadow"
             />
           </div>
-          <button onClick={handleSave} className="w-64 h-14 bg-blue-500 rounded-lg">
+          <button onClick={handleSave} className="w-full h-10 bg-blue-500 rounded-lg">
             Save
           </button>
         </div>
