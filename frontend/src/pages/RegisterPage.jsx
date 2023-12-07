@@ -3,7 +3,7 @@ import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../utils/fetch';
 
 function RegisterPage() {
-  const [user, setUser] = React.useState();
+  const [user, setUser] = React.useState(null);
   const [confirmPassword, setConfirmPassword] = React.useState();
 
   const navigate = useNavigate();
@@ -13,6 +13,7 @@ function RegisterPage() {
       ...prevState,
       name: event.target.value,
     }));
+    console.log(user);
   }
 
   function onUsernameChange(event) {
