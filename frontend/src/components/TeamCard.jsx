@@ -32,7 +32,7 @@ function TeamCard({ team }) {
       <p className="text-lg leading-8 text-indigo-950">
         {startDate} - {endDate}
       </p>
-      <Link className="w-10/12 mt-4 mb-6">
+      <Link to={`/team/${team._id}`} className="w-10/12 mt-4 mb-6">
         <button className="w-full h-12 transition ease-in-out duration-150 hover:scale-105 bg-blue-500 rounded-xl text-white hover:bg-blue-600 active:scale-100">
           View
         </button>
