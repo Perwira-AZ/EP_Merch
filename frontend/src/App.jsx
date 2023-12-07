@@ -1,15 +1,16 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { login, getUserLoggedIn, logout } from './utils/fetch';
-import Header from './components/Header';
-import LoginPage from './pages/LoginPage';
-import MyTeamPage from './pages/MyTeamPage';
-import JoinRequestPage from './pages/JoinRequestPage';
-import ExploreTeamPage from './pages/ExploreTeamPage';
-import NotificationBar from './components/NotificationBar';
-import CreateNewTeamPage from './pages/CreateNewTeamPage';
-import RegisterPage from './pages/RegisterPage';
-import TeamDetailPage from './pages/TeamDetailPage';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import { login, getUserLoggedIn, logout } from "./utils/fetch";
+import Header from "./components/Header";
+import LoginPage from "./pages/LoginPage";
+import MyTeamPage from "./pages/MyTeamPage";
+import JoinRequestPage from "./pages/JoinRequestPage";
+import ExploreTeamPage from "./pages/ExploreTeamPage";
+import NotificationBar from "./components/NotificationBar";
+import CreateNewTeamPage from "./pages/CreateNewTeamPage";
+import RegisterPage from "./pages/RegisterPage";
+import TeamDetailPage from "./pages/TeamDetailPage";
+import NotFoundPage from "./pages/404";
 
 function App() {
   const [user, setUser] = React.useState(null);
