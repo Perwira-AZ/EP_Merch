@@ -57,6 +57,17 @@ button {
   padding: 10px 15px;
   border-radius: 5px;
   cursor: pointer;
+  transform: scale(1);
+}
+
+button.animate-on-scroll-pop:hover {
+  transition-duration: 0.5s;
+  transform: scale(1.1);
+}
+
+button.animate-on-scroll:hover {
+  transition-duration: 0.5s;
+  transform: scale(1.1);
 }
 
 html {
@@ -64,5 +75,50 @@ html {
 }
 
 #platform-features {
-  padding-top: 80px; /* Sesuaikan dengan tinggi navbar Anda */
+  padding-top: 80px;
 }
+
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+.animate-on-scroll.fade-in {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-on-scroll-pop {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+.animate-on-scroll-pop.pop {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.animate-on-scroll-left {
+  opacity: 0;
+  transform: translateX(-200px);
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+.animate-on-scroll-left.slide-in-left {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.animate-on-scroll-right {
+  opacity: 0;
+  transform: translateX(200px);
+  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+}
+
+.animate-on-scroll-right.slide-in-right {
+  opacity: 1;
+  transform: translateX(0);
+}
+

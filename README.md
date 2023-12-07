@@ -195,7 +195,13 @@ TeamUp adalah aplikasi berbasis Web yang membantu dalam membuat serta mencari ti
   cd frontend
 ```
 3. Install Packages
+```
+  npm install react-icons
+```
 4. Run App
+```
+  npm run dev
+```
 
 ## 📂How to Run Back-end
 1. Go to back-end directory
