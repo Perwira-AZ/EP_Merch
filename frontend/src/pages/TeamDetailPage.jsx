@@ -1,8 +1,8 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import { getTeamById } from "../utils/fetch";
-import { formatDate } from "../utils/date";
-import PositionCardDetail from "../components/PositionCardDetail";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import { getTeamById } from '../utils/fetch';
+import { formatDate } from '../utils/date';
+import PositionCardDetail from '../components/PositionCardDetail';
 
 function TeamDetailPage() {
   const { id } = useParams();
@@ -17,7 +17,7 @@ function TeamDetailPage() {
         setLoading(false);
       })
       .catch((error) => {
-        console.error("Error fetching data:", error);
+        console.error('Error fetching data:', error);
         setLoading(false);
       });
   }, [id]);
@@ -26,9 +26,12 @@ function TeamDetailPage() {
     return <p>Loading...</p>;
   } else {
     return (
-      <div className="relative bg-white flex flex-row-reverse justify-center w-full px-[30px] gap-5 max-[760px]:flex-col z-0" style={{ overflowX: "hidden" }}>
+      <div className="relative bg-white flex flex-row-reverse justify-center w-full px-[30px] gap-5 max-[760px]:flex-col z-0" style={{ overflowX: 'hidden' }}>
         <svg height="256" viewBox="0 0 1920 256" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute z[-1] top-0 w-full">
-          <path d="M0 0V205.024C0 205.024 344.437 319.72 960 205.024C1575.56 90.3293 1920 205.024 1920 205.024V7.53698e-05L0 0Z" fill="url(#paint0_linear_283_1413)" />
+          <path
+            d="M0 0V205.024C0 205.024 344.437 319.72 960 205.024C1575.56 90.3293 1920 205.024 1920 205.024V7.53698e-05L0 0Z"
+            fill="url(#paint0_linear_283_1413)"
+          />
           <defs>
             <linearGradient id="paint0_linear_283_1413" x1="960" y1="0" x2="960" y2="449.688" gradientUnits="userSpaceOnUse">
               <stop stop-color="#5AC7FA" />
@@ -82,7 +85,14 @@ function TeamDetailPage() {
           {/* <MemberList /> */}
           <div className="flex flex-col w-full">
             {team.teamMember.map((member) => (
-              <PositionCardDetail positionName={member.position} detail={member.description} empty={member.member ? false : true} onJoinClick={() => console.log("Join Developer")} />
+              <PositionCardDetail
+                key={member._id}
+                id={member._id}
+                positionName={member.position}
+                detail={member.description}
+                empty={member.member ? false : true}
+                onJoinClick={() => console.log('Join Developer')}
+              />
             ))}
             {/* Add more cards as needed */}
           </div>
