@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { searchTeam } from "../utils/fetch";
 import { selectProvince, selectCity } from "../utils/location";
@@ -6,6 +6,38 @@ import TeamList from "../components/TeamList";
 import Loading from "../components/Loading";
 
 function ExploreTeamPage() {
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    };
+  
+    const handleIntersect = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains("animate-on-scroll-left")) {
+            entry.target.classList.add("slide-in-left");
+          } else if (entry.target.classList.contains("animate-on-scroll-right")) {
+            entry.target.classList.add("slide-in-right");
+          } else if (entry.target.classList.contains("animate-on-scroll")) {
+            entry.target.classList.add("fade-in");
+          } else if (entry.target.classList.contains("animate-on-scroll-pop")) {
+            entry.target.classList.add("pop");
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+  
+    const observer = new IntersectionObserver(handleIntersect, options);
+    const elements = document.querySelectorAll(".animate-on-scroll-left, .animate-on-scroll-right, .animate-on-scroll, .animate-on-scroll-pop");
+  
+    elements.forEach((element) => observer.observe(element));
+  
+    return () => observer.disconnect();
+  }, []);
+
   const [searchParams, setSearchParams] = useSearchParams();
   const activeKeyword = searchParams.get("keyword") || "";
   const activeProvince = searchParams.get("province") || "";
@@ -71,11 +103,11 @@ function ExploreTeamPage() {
         <div className="mx-auto min-[1330px]:max-w-7xl min-[900px]:max-w-[840px] max-w-[400px]">
           <div className="explore-team">
             <div className="pt-16 mb-7 flex flex-row items-center justify-center">
-              <h2 className="text-indigo-950 text-[45px] font-bold leading-[34px]">Explore Team</h2>
+              <h2 className="text-indigo-950 text-[45px] font-bold leading-[34px] animate-on-scroll-left">Explore Team</h2>
             </div>
 
             {/* Search Bar */}
-            <div className="mb-3 xl:w-1/2 mx-auto">
+            <div className="mb-3 xl:w-1/2 mx-auto animate-on-scroll-left">
               <input
                 value={activeKeyword}
                 onChange={changeSearchParamas}
@@ -87,7 +119,7 @@ function ExploreTeamPage() {
             </div>
 
             {/* Set Location */}
-            <div className="mb-10 flex xl:w-1/2 mx-auto">
+            <div className="mb-10 flex xl:w-1/2 mx-auto animate-on-scroll-left">
               <div className="flex-1 mr-2">
                 <label htmlFor="province" className="block text-sm font-medium text-gray-700">
                   Province
@@ -113,8 +145,9 @@ function ExploreTeamPage() {
                 </select>
               </div>
             </div>
-
-            {isLoading ? <Loading /> : findTeam != null && findTeam.length ? <TeamList teams={findTeam} /> : <p>No Team</p>}
+            <div className="animate-on-scroll">
+              {isLoading ? <Loading /> : findTeam != null && findTeam.length ? <TeamList teams={findTeam} /> : <p>No Team</p>}
+            </div>
           </div>
         </div>
       </div>
