@@ -1,15 +1,15 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import { login, getUserLoggedIn, logout } from "./utils/fetch";
-import Header from "./components/Header";
-import LoginPage from "./pages/LoginPage";
-import MyTeamPage from "./pages/MyTeamPage";
-import JoinRequestPage from "./pages/JoinRequestPage";
-import ExploreTeamPage from "./pages/ExploreTeamPage";
-import NotificationBar from "./components/NotificationBar";
-import CreateNewTeamPage from "./pages/CreateNewTeamPage";
-import RegisterPage from "./pages/RegisterPage";
-import TeamDetailPage from "./pages/TeamDetailPage";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { login, getUserLoggedIn, logout } from './utils/fetch';
+import Header from './components/Header';
+import LoginPage from './pages/LoginPage';
+import MyTeamPage from './pages/MyTeamPage';
+import JoinRequestPage from './pages/JoinRequestPage';
+import ExploreTeamPage from './pages/ExploreTeamPage';
+import NotificationBar from './components/NotificationBar';
+import CreateNewTeamPage from './pages/CreateNewTeamPage';
+import RegisterPage from './pages/RegisterPage';
+import TeamDetailPage from './pages/TeamDetailPage';
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -55,7 +55,7 @@ function App() {
         <Route path="/exploreteam" element={<ExploreTeamPage />} />
         <Route path="/createnewteam" element={user ? <CreateNewTeamPage /> : <LoginPage onLogin={onLogin} />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/teamdetail" element={<TeamDetailPage />} />
+        <Route path="/team/:id" element={<TeamDetailPage />} />
       </Routes>
     </div>
   );
