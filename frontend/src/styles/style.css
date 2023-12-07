@@ -60,12 +60,8 @@ button {
   transform: scale(1);
 }
 
+button.animate-on-scroll:hover,
 button.animate-on-scroll-pop:hover {
-  transition-duration: 0.5s;
-  transform: scale(1.1);
-}
-
-button.animate-on-scroll:hover {
   transition-duration: 0.5s;
   transform: scale(1.1);
 }
@@ -122,3 +118,15 @@ html {
   transform: translateX(0);
 }
 
+.custom-button-prev,
+.custom-button-next {
+  background-color: transparent;
+  border: 2px solid white;
+  color: 2px solid white;
+}
+
+.custom-button-prev:hover,
+.custom-button-next:hover {
+  transition-duration: 0.5s;
+  transform: scale(1.1);
+}
