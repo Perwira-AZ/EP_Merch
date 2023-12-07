@@ -1,4 +1,4 @@
-<h1 align="center"> TeamUp </h1>
+<h1 align="center"> ♠️TeamUp </h1>
 <p align="center">
 <img src="https://media.tenor.com/02ILjyFVXWQAAAAC/handshake.gif" width="100%" height="100%">
 </p>
