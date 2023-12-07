@@ -1,9 +1,10 @@
 import React from 'react';
+import defaultProfile from '../assets/profile.png';
 import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../utils/fetch';
 
 function RegisterPage() {
-  const [user, setUser] = React.useState();
+  const [user, setUser] = React.useState({ profilePict: '' });
   const [confirmPassword, setConfirmPassword] = React.useState();
 
   const navigate = useNavigate();

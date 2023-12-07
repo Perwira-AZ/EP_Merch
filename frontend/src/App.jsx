@@ -13,16 +13,19 @@ import RegisterPage from './pages/RegisterPage';
 import TeamDetailPage from './pages/TeamDetailPage';
 import NotFoundPage from './pages/404';
 import LandingPage from './pages/LandingPage';
+import Loading from './components/Loading';
 
 function App() {
   const [user, setUser] = React.useState(null);
-  const [intialization, setInitialization] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
   const [viewNotif, setViewNotif] = React.useState(false);
+
+  console.log(user);
 
   React.useEffect(() => {
     getUserLoggedIn().then(({ data }) => {
       setUser(data);
-      setInitialization(false);
+      setIsLoading(false);
     });
   }, []);
 
@@ -50,18 +53,22 @@ function App() {
     <div className="app-container min-h-screen">
       <Header clickNotif={clickNotif} onLogout={onLogout} />
       {viewNotif === true ? <NotificationBar /> : null}
-      <Routes>
-        <Route path="/" element={<LandingPage />} />
-        <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
-        <Route path="/profile" element={<ProfilePage user={user} />} />
-        <Route path="/myteam" element={user ? <MyTeamPage /> : <LoginPage onLogin={onLogin} />} />
-        <Route path="/joinrequest" element={user ? <JoinRequestPage /> : <LoginPage onLogin={onLogin} />} />
-        <Route path="/exploreteam" element={<ExploreTeamPage />} />
-        <Route path="/createnewteam" element={user ? <CreateNewTeamPage /> : <LoginPage onLogin={onLogin} />} />
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/team/:id" element={user ? <TeamDetailPage userID={user._id} /> : <LoginPage onLogin={onLogin} />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
+          <Route path="/profile" element={<ProfilePage user={user} />} />
+          <Route path="/myteam" element={user ? <MyTeamPage /> : <LoginPage onLogin={onLogin} />} />
+          <Route path="/joinrequest" element={user ? <JoinRequestPage /> : <LoginPage onLogin={onLogin} />} />
+          <Route path="/exploreteam" element={<ExploreTeamPage />} />
+          <Route path="/createnewteam" element={user ? <CreateNewTeamPage /> : <LoginPage onLogin={onLogin} />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/team/:id" element={user ? <TeamDetailPage userID={user._id} /> : <LoginPage onLogin={onLogin} />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      )}
     </div>
   );
 }

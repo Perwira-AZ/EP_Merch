@@ -3,14 +3,22 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getTeamById, deleteTeam, requestToJoin } from '../utils/fetch';
 import { formatDate } from '../utils/date';
 import PositionCardDetail from '../components/PositionCardDetail';
+import ConfirmDelete from '../components/ConfirmDeletionBox';
+import Cover from '../components/Cover';
 import Loading from '../components/Loading';
+import { set } from 'mongoose';
 
 function TeamDetailPage({ userID }) {
   const { id } = useParams();
   const [team, setTeam] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [idle, setIdle] = React.useState({ status: 'waiting' });
 
   const navigate = useNavigate();
+
+  function chengeDeleting(id) {
+    setIdle({ status: 'deleting' });
+  }
 
   async function onDeleteTeam(id) {
     const response = await deleteTeam(id);
@@ -40,10 +48,20 @@ function TeamDetailPage({ userID }) {
   }
 
   if (loading) {
-    return <Loading />;
+    return (
+      <div className="pt-[100px]">
+        <Loading />
+      </div>
+    );
   } else {
     return (
       <div className="relative bg-white flex flex-row-reverse justify-center w-full px-[30px] gap-5 max-[760px]:flex-col z-0" style={{ overflowX: 'hidden' }}>
+        {idle.status === 'deleting' ? (
+          <div>
+            <Cover />
+            <ConfirmDelete onConfirm={() => onDeleteTeam(id)} onCancel={() => setIdle({ status: 'waiting' })} />
+          </div>
+        ) : null}
         <svg height="256" viewBox="0 0 1920 256" fill="none" xmlns="http://www.w3.org/2000/svg" className="absolute z-[-1] top-0 w-full">
           <path
             d="M0 0V205.024C0 205.024 344.437 319.72 960 205.024C1575.56 90.3293 1920 205.024 1920 205.024V7.53698e-05L0 0Z"
@@ -115,7 +133,7 @@ function TeamDetailPage({ userID }) {
           </div>
           {userID === team.teamLeaderID ? (
             <button
-              onClick={() => onDeleteTeam(id)}
+              onClick={chengeDeleting}
               className="rounded-xl w-44 h-10 p-0 mb-5 text-white text-normal text-lg bg-gradient-to-l from-red-500 to-red-600 transition ease-in-out duration-150 hover:scale-105 active:scale-100"
             >
               <p className="text-sm">Delete Team</p>
