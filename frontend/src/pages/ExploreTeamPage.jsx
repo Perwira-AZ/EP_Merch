@@ -1,19 +1,20 @@
-import React from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { searchTeam } from '../utils/fetch';
-import { selectProvince, selectCity } from '../utils/location';
-import TeamList from '../components/TeamList';
+import React from "react";
+import { useSearchParams } from "react-router-dom";
+import { searchTeam } from "../utils/fetch";
+import { selectProvince, selectCity } from "../utils/location";
+import TeamList from "../components/TeamList";
+import Loading from "../components/Loading";
 
 function ExploreTeamPage() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const activeKeyword = searchParams.get('keyword') || '';
-  const activeProvince = searchParams.get('province') || '';
-  const activeCity = searchParams.get('city') || '';
+  const activeKeyword = searchParams.get("keyword") || "";
+  const activeProvince = searchParams.get("province") || "";
+  const activeCity = searchParams.get("city") || "";
   const [findTeam, setFindTeam] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(true);
 
-  const provinceList = ['--Select Province--', ...selectProvince()];
-  const [cityList, setCityList] = React.useState(activeProvince ? ['--Select City--', ...selectCity(activeProvince)] : ['--Select City--']);
+  const provinceList = ["--Select Province--", ...selectProvince()];
+  const [cityList, setCityList] = React.useState(activeProvince ? ["--Select City--", ...selectCity(activeProvince)] : ["--Select City--"]);
 
   React.useEffect(() => {
     searchTeam(activeKeyword, activeProvince, activeCity)
@@ -22,7 +23,7 @@ function ExploreTeamPage() {
         setIsLoading(false);
       })
       .catch(({ error }) => {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
         setIsLoading(false);
       });
   }, [activeKeyword, activeProvince, activeCity]);
@@ -35,14 +36,14 @@ function ExploreTeamPage() {
   }
 
   function onProvinceChange(event) {
-    if (event.target.value === '--Select Province--') {
-      setCityList(['--Select City--']);
+    if (event.target.value === "--Select Province--") {
+      setCityList(["--Select City--"]);
       setSearchParams((prevState) => ({
         ...prevState,
-        province: '',
+        province: "",
       }));
     } else {
-      setCityList(['--Select City--', ...selectCity(event.target.value)]);
+      setCityList(["--Select City--", ...selectCity(event.target.value)]);
       setSearchParams((prevState) => ({
         ...prevState,
         province: event.target.value,
@@ -51,10 +52,10 @@ function ExploreTeamPage() {
   }
 
   function onCityChange(event) {
-    if (event.target.value === '--Select City--') {
+    if (event.target.value === "--Select City--") {
       setSearchParams((prevState) => ({
         ...prevState,
-        city: '',
+        city: "",
       }));
     } else {
       setSearchParams((prevState) => ({
@@ -113,7 +114,7 @@ function ExploreTeamPage() {
               </div>
             </div>
 
-            {isLoading ? <p>Loading...</p> : findTeam != null && findTeam.length ? <TeamList teams={findTeam} /> : <p>No Team</p>}
+            {isLoading ? <Loading /> : findTeam != null && findTeam.length ? <TeamList teams={findTeam} /> : <p>No Team</p>}
           </div>
         </div>
       </div>

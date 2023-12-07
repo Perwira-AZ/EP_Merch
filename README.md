@@ -1,10 +1,10 @@
-# TeamUP
+<h1 align="center"> TeamUp </h1>
 <p align="center">
 <img src="https://media.tenor.com/02ILjyFVXWQAAAAC/handshake.gif" width="100%" height="100%">
 </p>
 
 ## 📌About TeamUp
-Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengikuti sebuah perlombaan.
+TeamUp adalah aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengikuti sebuah perlombaan.
 
 ## 👩‍💻Meet Our Team
 1. Mochammad Novaldy Pratama Hakim (20/463606/TK/51598)
@@ -13,6 +13,16 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 4. Perwira Akhdan Zumarsyah (21/479386/TK/52881)
 5. Gifto Ramadha (21/480271/TK/52996)
 
+## 🎓Deliverables
+### 🥈Pra-UTS
+[Presentation Video](https://youtu.be/pWndVrUmbUM) <br>
+[Presentation Slide](https://www.canva.com/design/DAFvjNEOXbw/w4OOE8crnTyhCfgRLK9CeQ/edit)
+
+### 🥇Post-UTS 
+[Presentation Video](https://youtu.be/pWndVrUmbUM) <br>
+[Presentation Slide](https://youtu.be/pWndVrUmbUM) <br>
+[Postman Documentation](https://youtu.be/pWndVrUmbUM) <br>
+
 ## 📘Use Case Diagram
 ![paw-teamup-use-case drawio](https://github.com/Perwira-AZ/TeamUP/assets/92919810/dd6cbca3-e98d-40dd-b832-61ea39253f55)
 
@@ -20,9 +30,8 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 ![paw-teamup-erd drawio](https://github.com/Perwira-AZ/TeamUP/assets/92919810/f30e5029-0ba0-4caa-8b03-25cacd2250ac)
 
 
-
-## BackEnd Documentation
-### User
+## ☑️Features and Endpoints
+### 👱‍♀️User
 
 #### 1. Register New User
 
@@ -73,7 +82,7 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 | `password` | `string` |
 
 
-### Teams 
+### ⛹️Teams 
 
 #### 1. Search teams
 
@@ -168,6 +177,30 @@ Aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengik
 | :-------- | :------- |
 | `requestId` | `ObjectId` |
 
-## Pra-UTS
-[Presentation Video](https://youtu.be/pWndVrUmbUM) <br>
-[Presentation Slide](https://www.canva.com/design/DAFvjNEOXbw/w4OOE8crnTyhCfgRLK9CeQ/edit)
+## 💻Tech Stack
+* MongoDB
+* ExpressJS
+* ReactJS
+* NodeJS
+* Figma
+* TailwindCSS
+
+## 🎨How to Run Front-end
+1. Clone this repository 
+```
+  git clone https://github.com/Perwira-AZ/TeamUP.git
+```
+2. Go to front-end directory
+```
+  cd frontend
+```
+3. Install Packages
+4. Run App
+
+## 📂How to Run Back-end
+1. Go to back-end directory
+```
+  cd backend
+```
+2. Install Packages
+3. Run App

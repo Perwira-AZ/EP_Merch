@@ -41,8 +41,8 @@ const getTeam = async (req, res) => {
       throw new Error("Team doesn't exist");
     }
 
-    res.status(200).json({ team });
-  } catch (error) {
+    res.status(200).json(team);
+  } catch (err) {
     res.status(400).json({ error: err.message() });
   }
 };
