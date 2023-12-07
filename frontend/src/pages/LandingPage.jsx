@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import logo from "../assets/Team UP Logo.svg";
 import features1 from "../assets/features1.png";
 import features2 from "../assets/features2.png";
@@ -9,7 +9,7 @@ const scrollToPlatformFeatures = () => {
   const platformFeaturesElement = document.getElementById("platform-features");
 
   if (platformFeaturesElement) {
-    const navbarHeight = 80; // Sesuaikan dengan tinggi navbar Anda
+    const navbarHeight = 80;
     const offsetTop = platformFeaturesElement.offsetTop - navbarHeight;
 
     window.scrollTo({ top: offsetTop, behavior: "smooth" });
@@ -17,16 +17,48 @@ const scrollToPlatformFeatures = () => {
 };
 
 const LandingPage = () => {
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    };
+  
+    const handleIntersect = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains("animate-on-scroll-left")) {
+            entry.target.classList.add("slide-in-left");
+          } else if (entry.target.classList.contains("animate-on-scroll-right")) {
+            entry.target.classList.add("slide-in-right");
+          } else if (entry.target.classList.contains("animate-on-scroll")) {
+            entry.target.classList.add("fade-in");
+          } else if (entry.target.classList.contains("animate-on-scroll-pop")) {
+            entry.target.classList.add("pop");
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+  
+    const observer = new IntersectionObserver(handleIntersect, options);
+    const elements = document.querySelectorAll(".animate-on-scroll-left, .animate-on-scroll-right, .animate-on-scroll, .animate-on-scroll-pop");
+  
+    elements.forEach((element) => observer.observe(element));
+  
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="bg-gradient-to-b from-cyan-300 to-blue-500 min-h-screen flex flex-col items-center justify-center p-20 relative">
-      <div className="absolute inset-0 z-0" style={{ top: "-300px" }}>
-        <svg className="w-full" height="1037" viewBox="0 0 1920 1037" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div className="absolute inset-0 z-0" style={{ top: "-350px" }}>
+        <svg className="w-full animate-on-scroll" height="1037" viewBox="0 0 1920 1037" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0 0H1920V936.66C1920 936.66 1575.56 710.895 960 936.66C344.438 1162.43 0 936.66 0 936.66V0Z" fill="#FAFAFA" />
         </svg>
       </div>
       {/* Header Section */}
       <div className="mt-20 z-10">
-        <div className="max-w-6xl flex items-center justify-between">
+        <div className="max-w-6xl flex items-center justify-between animate-on-scroll">
           <p className="text-indigo-950 text-4xl font-bold font-Poppins leading-tight">
             Create the BEST TEAM <br /> For Your Project
             <p className="text-indigo-950 text-base font-normal font-Poppins leading-6 text-left mt-2 max-w-[500px]">
@@ -38,18 +70,18 @@ const LandingPage = () => {
         <div className="mt-5 mb-20">
           <a href="#platform-features" onClick={scrollToPlatformFeatures}>
             {" "}
-            <button className="rounded-xl w-44 h-10 p-0 mb-5 text-white text-normal text-sm bg-indigo-950 -10 transition ease-in-out duration-150 hover:scale-105 active:scale-100">Know More</button>
+            <button className="rounded-xl w-44 h-10 p-0 mb-5 text-white text-normal text-sm bg-indigo-950 -10 transition ease-in-out duration-150 hover:scale-105 active:scale-100 animate-on-scroll">Know More</button>
           </a>
         </div>
       </div>
       <div className="min-h-screen flex flex-col items-center justify-center p-20 z-10">
         {/* Platform Features Section */}
-        <p id="platform-features" className="text-neutral-50 text-4xl font-semibold font-Poppins leading-tight mb-10">
+        <p id="platform-features" className="text-neutral-50 text-4xl font-semibold font-Poppins leading-tight mb-10 animate-on-scroll-pop">
           Platform Features
         </p>
 
         {/* Feature 1 */}
-        <div className="max-w-6xl flex items-center justify-between mb-10">
+        <div className="max-w-6xl flex items-center justify-between mb-10 animate-on-scroll-left">
           <div className="flex flex-col text-center mr-20">
             <p className="text-neutral-50 text-3xl font-semibold font-Poppins leading-8 mb-5">Create and Manage Teams</p>
             <p className="text-neutral-50 text-base font-regular font-Poppins leading-8 max-w-[400px]">
@@ -60,7 +92,7 @@ const LandingPage = () => {
         </div>
 
         {/* Feature 2 */}
-        <div className="max-w-6xl flex items-center justify-between mb-10">
+        <div className="max-w-6xl flex items-center justify-between mb-10 animate-on-scroll-right">
           <img className="w-80 h-70" src={features2} alt="Explore Another Teams" />
           <div className="flex flex-col text-center ml-20">
             <p className="text-neutral-50 text-3xl font-semibold font-Poppins leading-8 mb-5">Explore Another Teams</p>
@@ -71,7 +103,7 @@ const LandingPage = () => {
         </div>
 
         {/* Feature 3 */}
-        <div className="max-w-6xl flex items-center justify-between mb-10">
+        <div className="max-w-6xl flex items-center justify-between mb-10 animate-on-scroll-left">
           <div className="flex flex-col text-center mr-20">
             <p className="text-neutral-50 text-3xl font-semibold font-Poppins leading-8 mb-5">Customize Your Profile</p>
             <p className="text-neutral-50 text-base font-regular font-Poppins leading-8 max-w-[400px]">
@@ -83,12 +115,12 @@ const LandingPage = () => {
 
         <div className="max-w-6xl flex flex-col items-center mb-10">
           <Link to="/register">
-            <button className="bg-white text-indigo-950 text-2x1 font-bold py-3 px-10 rounded-[15px] mb-10 transition ease-in-out duration-150 hover:scale-105 active:scale-100">Sign Up Now!</button>
+            <button className="bg-white text-indigo-950 text-2x1 font-bold py-3 px-10 rounded-[15px] mb-10 animate-on-scroll-pop">Sign Up Now!</button>
           </Link>
-          <p className="text-neutral-50 text-4xl font-bold font-Poppins leading-tight mb-4">Let’s Team UP!</p>
+          <p className="text-neutral-50 text-4xl font-bold font-Poppins leading-tight mb-4 animate-on-scroll">Let’s Team UP!</p>
         </div>
 
-        <div className="flex flex-col items-center mb-10">
+        <div className="flex flex-col items-center mb-10 animate-on-scroll">
           <img className="w-48 h-48 mb-2" src={logo} alt="Team UP" />
         </div>
       </div>
