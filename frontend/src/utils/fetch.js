@@ -67,6 +67,45 @@ async function getUserLoggedIn() {
   return { error: false, data: responseJson };
 }
 
+// Update user information including profilePict
+async function updateUser(id, userInfo, token) {
+  const response = await fetch(`${BASE_URL}/profile/${id}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`, // Make sure the token is passed correctly
+    },
+    body: JSON.stringify(userInfo),
+  });
+  return response.json();
+}
+
+// Upload profilePict
+async function uploadProfilePict(id, file, token) {
+  const formData = new FormData();
+  formData.append('profilePict', file);
+
+  const response = await fetch(`${BASE_URL}/profile/${id}/profilePict`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+    body: formData,
+  });
+  return response.json();
+}
+
+// Delete profilePict
+async function deleteProfilePict(id, token) {
+  const response = await fetch(`${BASE_URL}/profile/${id}/profilePict`, {
+    method: 'DELETE',
+    headers: {
+      'Authorization': `Bearer ${token}`,
+    },
+  });
+  return response.json();
+}
+
 //Team
 async function getMyTeam() {
   const response = await fetchWithtoken(`${BASE_URL}/teams/myTeams`);
@@ -201,6 +240,9 @@ export {
   login,
   logout,
   getUserLoggedIn,
+  updateUser,
+  uploadProfilePict,
+  deleteProfilePict,
   getMyTeam,
   getTeamById,
   viewRequests,
