@@ -5,7 +5,7 @@ import EditProfile from '../components/EditProfile'; // Import the EditProfile c
 import TeamList from '../components/TeamList';
 import TeamCard from '../components/TeamCard';
 
-function ProfilePage({user}) {
+function ProfilePage({ user }) {
   const [myTeam, setMyTeam] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -22,11 +22,12 @@ function ProfilePage({user}) {
   return (
     <div className="profilePage bg-zinc-50 pt-[60px] pe-8 min-h-screen box-border">
       <div className="profile pe-16">
-      <div className="mx-auto min-[330px]:max-w-7xl min-[900px]:max-w-[840px] max-w-[360px]">
-        <EditProfile userId={user._id}/>
+        <div className="mx-auto min-[330px]:max-w-7xl min-[900px]:max-w-[840px] max-w-[360px]">
+          <EditProfile user={user} />
+        </div>
       </div>
     </div>
-    </div>);
+  );
 }
 
 export default ProfilePage;

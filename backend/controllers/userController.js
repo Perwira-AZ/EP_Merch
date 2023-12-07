@@ -29,7 +29,7 @@ const getUser = async (req, res) => {
 
 // Update a user
 const updateUser = async (req, res) => {
-  const { id } = req.params;
+  const id = await req.user._id;
 
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -42,16 +42,18 @@ const updateUser = async (req, res) => {
         ...req.body,
       }
     );
-
-    const updatedUser = await User.findById(id);
+    let updatedUser = null;
+    if (user) {
+      updatedUser = await User.findById(id);
+    }
 
     if (!updatedUser) {
       throw new Error("User doesn't exist");
     }
 
     res.status(200).json(updatedUser);
-  } catch (error) {
-    res.status(404).json({ error: err.message() });
+  } catch (err) {
+    res.status(404).json({ error: err.message });
   }
 };
 

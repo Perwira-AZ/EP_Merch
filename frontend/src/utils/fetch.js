@@ -68,42 +68,20 @@ async function getUserLoggedIn() {
 }
 
 // Update user information including profilePict
-async function updateUser(id, userInfo, token) {
-  const response = await fetch(`${BASE_URL}/profile/${id}`, {
+async function updateUser(userInfo) {
+  console.log(userInfo);
+  const response = await fetchWithtoken(`${BASE_URL}/user/myProfile`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${token}`, // Make sure the token is passed correctly
     },
     body: JSON.stringify(userInfo),
   });
-  return response.json();
-}
-
-// Upload profilePict
-async function uploadProfilePict(id, file, token) {
-  const formData = new FormData();
-  formData.append('profilePict', file);
-
-  const response = await fetch(`${BASE_URL}/profile/${id}/profilePict`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    body: formData,
-  });
-  return response.json();
-}
-
-// Delete profilePict
-async function deleteProfilePict(id, token) {
-  const response = await fetch(`${BASE_URL}/profile/${id}/profilePict`, {
-    method: 'DELETE',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return response.json();
+  const responseJson = await response.json();
+  if (responseJson.error) {
+    return { error: true, data: responseJson.error };
+  }
+  return { error: false, data: responseJson };
 }
 
 //Team
@@ -135,11 +113,7 @@ async function createTeam({ teamName, teamLocation, teamStart, teamEnd, teamComp
     },
     body: JSON.stringify({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamLogo, teamMember }),
   });
-  const jsonString = JSON.stringify({ teamName, teamLocation, teamStart, teamEnd, teamCompetition, teamDescription, teamLogo, teamMember });
-  const textEncoder = new TextEncoder();
-  const jsonSizeInBytes = textEncoder.encode(jsonString).length;
 
-  console.log(jsonSizeInBytes);
   const responseJson = await response.json();
 
   if (responseJson.error) {
@@ -253,8 +227,6 @@ export {
   logout,
   getUserLoggedIn,
   updateUser,
-  uploadProfilePict,
-  deleteProfilePict,
   getMyTeam,
   getTeamById,
   deleteTeam,

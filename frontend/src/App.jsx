@@ -59,7 +59,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
-          <Route path="/profile" element={<ProfilePage user={user} />} />
+          <Route path="/profile" element={user ? <ProfilePage user={user} /> : <LoginPage onLogin={onLogin} />} />
           <Route path="/myteam" element={user ? <MyTeamPage /> : <LoginPage onLogin={onLogin} />} />
           <Route path="/joinrequest" element={user ? <JoinRequestPage /> : <LoginPage onLogin={onLogin} />} />
           <Route path="/exploreteam" element={<ExploreTeamPage />} />

@@ -7,9 +7,6 @@ const router = express.Router();
 // GET a single user
 router.get('/profile/:id', getUser);
 
-// UPDATE a user
-router.patch('/profile/:id', updateUser);
-
 // Register new user
 router.post('/register', registerUser);
 
@@ -18,6 +15,9 @@ router.post('/login', loginUser);
 
 // require auth
 router.use(requireAuth);
+
+// UPDATE a user
+router.patch('/myProfile', updateUser);
 
 // User profile
 router.get('/myProfile', getUserLoggedIn);
