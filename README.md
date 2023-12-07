@@ -4,7 +4,7 @@
 </p>
 
 ## 📌About TeamUp
-TeamUp adalah aplikasi berbasis Web yang membantu dalam membuat serta mencari tim untuk mengikuti sebuah perlombaan.
+TeamUp is a Web based application that can help users to create and find a great team for joining competitions. [Click here](https://team-up-paw.vercel.app/) to experience the ease of teaming up.
 
 ## 👩‍💻Meet Our Team
 1. Mochammad Novaldy Pratama Hakim (20/463606/TK/51598)
@@ -19,8 +19,9 @@ TeamUp adalah aplikasi berbasis Web yang membantu dalam membuat serta mencari ti
 [Presentation Slide](https://www.canva.com/design/DAFvjNEOXbw/w4OOE8crnTyhCfgRLK9CeQ/edit)
 
 ### 🥇Post-UTS 
+[Web Application link in Vercel](https://team-up-paw.vercel.app/) <br>
 [Presentation Video](https://youtu.be/pWndVrUmbUM) <br>
-[Presentation Slide](https://youtu.be/pWndVrUmbUM) <br>
+[Presentation Slide](https://www.canva.com/design/DAFvjNEOXbw/w4OOE8crnTyhCfgRLK9CeQ/edit) <br>
 [Postman Documentation](https://youtu.be/pWndVrUmbUM) <br>
 
 ## 📘Use Case Diagram
