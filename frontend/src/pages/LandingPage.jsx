@@ -3,6 +3,7 @@ import logo from "../assets/Team UP Logo.svg";
 import features1 from "../assets/features1.png";
 import features2 from "../assets/features2.png";
 import features3 from "../assets/features3.png";
+import { Link } from "react-router-dom";
 
 const scrollToPlatformFeatures = () => {
   const platformFeaturesElement = document.getElementById("platform-features");
@@ -75,9 +76,10 @@ const LandingPage = () => {
           <img className="w-96= h-64" src={features3} alt="Customize Your Profile" />
         </div>
 
-        {/* Sign Up Section */}
         <div className="max-w-6xl flex flex-col items-center mb-10">
-          <button className="bg-white text-indigo-950 text-xl2 font-bold py-3 px-10 rounded-[15px] mb-10 transition ease-in-out duration-150 hover:scale-105 active:scale-100">Sign Up Now!</button>
+          <Link to="/register">
+            <button className="bg-white text-indigo-950 text-xl2 font-bold py-3 px-10 rounded-[15px] mb-10 transition ease-in-out duration-150 hover:scale-105 active:scale-100">Sign Up Now!</button>
+          </Link>
           <div className="text-neutral-50 text-4xl font-bold font-Poppins leading-tight mb-4">Let’s Team UP!</div>
         </div>
 
