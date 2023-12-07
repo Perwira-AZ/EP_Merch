@@ -11,6 +11,7 @@ import CreateNewTeamPage from "./pages/CreateNewTeamPage";
 import RegisterPage from "./pages/RegisterPage";
 import TeamDetailPage from "./pages/TeamDetailPage";
 import NotFoundPage from "./pages/404";
+import LandingPage from "./pages/LandingPage";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -49,7 +50,7 @@ function App() {
       <Header clickNotif={clickNotif} onLogout={onLogout} />
       {viewNotif === true ? <NotificationBar /> : null}
       <Routes>
-        <Route path="/" element={<LoginPage onLogin={onLogin} />} />
+        <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
         <Route path="/myteam" element={user ? <MyTeamPage /> : <LoginPage onLogin={onLogin} />} />
         <Route path="/joinrequest" element={user ? <JoinRequestPage /> : <LoginPage onLogin={onLogin} />} />
