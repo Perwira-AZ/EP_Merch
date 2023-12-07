@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import { login, getUserLoggedIn, logout } from "./utils/fetch";
 import Header from "./components/Header";
 import LoginPage from "./pages/LoginPage";
+import ProfilePage from "./pages/ProfilePage";
 import MyTeamPage from "./pages/MyTeamPage";
 import JoinRequestPage from "./pages/JoinRequestPage";
 import ExploreTeamPage from "./pages/ExploreTeamPage";
@@ -52,6 +53,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
+        <Route path="/profile" element={<ProfilePage user={user} />} />
         <Route path="/myteam" element={user ? <MyTeamPage /> : <LoginPage onLogin={onLogin} />} />
         <Route path="/joinrequest" element={user ? <JoinRequestPage /> : <LoginPage onLogin={onLogin} />} />
         <Route path="/exploreteam" element={<ExploreTeamPage />} />
