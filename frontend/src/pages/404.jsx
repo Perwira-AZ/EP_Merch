@@ -1,6 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 function NotFoundPage() {
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    };
+  
+    const handleIntersect = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains("animate-on-scroll-left")) {
+            entry.target.classList.add("slide-in-left");
+          } else if (entry.target.classList.contains("animate-on-scroll-right")) {
+            entry.target.classList.add("slide-in-right");
+          } else if (entry.target.classList.contains("animate-on-scroll")) {
+            entry.target.classList.add("fade-in");
+          } else if (entry.target.classList.contains("animate-on-scroll-pop")) {
+            entry.target.classList.add("pop");
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+  
+    const observer = new IntersectionObserver(handleIntersect, options);
+    const elements = document.querySelectorAll(".animate-on-scroll-left, .animate-on-scroll-right, .animate-on-scroll, .animate-on-scroll-pop");
+  
+    elements.forEach((element) => observer.observe(element));
+  
+    return () => observer.disconnect();
+  }, []);
+
   const svgWidth = 600;
   const svgHeight = 312;
 
@@ -8,7 +40,7 @@ function NotFoundPage() {
   const scaleY = svgHeight / 596;
 
   return (
-    <div className="flex items-center justify-center h-screen bg-white">
+    <div className="flex items-center justify-center h-screen bg-white animate-on-scroll-pop">
       <svg width="1143" height="596" viewBox="0 0 1143 596" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ transform: `scale(${scaleX}, ${scaleY})` }}>
         <g filter="url(#filter0_d_702_79)">
           <rect x="4" width="1135" height="588" rx="30" fill="url(#paint0_linear_702_79)" />
