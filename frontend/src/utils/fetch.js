@@ -119,6 +119,18 @@ async function searchTeam(keyword, province, city) {
   return { error: false, data: responseJson };
 }
 
+async function requestToJoin(id) {
+  const response = await fetchWithtoken(`${BASE_URL}/teams/request/${id}`, {
+    method: 'PATCH',
+  });
+  const responseJson = await response.json();
+
+  if (responseJson.error) {
+    return { error: true, data: responseJson.error };
+  }
+  return { error: false, data: responseJson };
+}
+
 async function viewRequests() {
   const response = await fetchWithtoken(`${BASE_URL}/teams/request`);
   const responseJson = await response.json();
@@ -184,6 +196,7 @@ async function getNotif() {
 export {
   getToken,
   searchTeam,
+  requestToJoin,
   register,
   login,
   logout,

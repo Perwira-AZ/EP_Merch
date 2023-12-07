@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PositionCardDetail = ({ positionName, detail, empty, onJoinClick }) => {
+const PositionCardDetail = ({ id, positionName, detail, empty, onJoinClick }) => {
   return (
     <div className="flex items-center justify-between bg-gradient-to-r from-blue-500 to-cyan-300 p-4 rounded-xl shadow mb-4 w-[900px]  h-[90px] w-full">
       <div>
@@ -10,7 +10,7 @@ const PositionCardDetail = ({ positionName, detail, empty, onJoinClick }) => {
       </div>
       {empty ? (
         <button
-          onClick={onJoinClick}
+          onClick={() => onJoinClick(id)}
           className="w-[90px] bg-indigo-950 text-white text-sm px-4 py-2 rounded-lg hover:shadow-lg transition ease-in-out duration-150 hover:scale-105 active:scale-100"
         >
           Join
