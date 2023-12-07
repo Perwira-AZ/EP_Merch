@@ -1,9 +1,9 @@
-import React from 'react';
-import { TbLogout } from 'react-icons/tb';
-import { IoNotificationsSharp } from 'react-icons/io5';
-import TeamUP from '../assets/Team.png';
-import { Link } from 'react-router-dom';
-import { logout } from '../utils/fetch';
+import React from "react";
+import { TbLogout } from "react-icons/tb";
+import { IoNotificationsSharp } from "react-icons/io5";
+import TeamUP from "../assets/Team UP Logo BnW.png";
+import { Link } from "react-router-dom";
+import { logout } from "../utils/fetch";
 
 function Header({ clickNotif, onLogout }) {
   return (
