@@ -1,16 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import profilePict from '../assets/profile.png';
+import defaultPict from '../assets/profile.png';
 
-function JoinRequestItem({ request, accept, reject }) {
+function JoinRequestItem({ request, member, accept, reject }) {
   return (
     <div className="join-request__item w-full p-5 rounded-3xl bg-gradient-to-r from-blue-500 to-cyan-300 shadow-lg flex flex-row items-center justify-between mb-4">
       <div className="join-request__detail">
         <div className="join-request__profile flex flex-row gap-6 items-center">
-          <img src={profilePict} alt="" className="w-[126px] h-[126px] rounded-full" />
+          <Link to={`/profile/${member}`} className="transition ease-in-out duration-150 hover:scale-[1.03] active:scale-100">
+            <img src={request.prodilePict || defaultPict} alt="" className="w-[126px] h-[126px] rounded-full" />
+          </Link>
           <div className="join-request__user">
-            <p className="text-white text-5xl font-semibold leading-[56px]">{request.name}</p>
-            <p className="text-white text-md font-normal mb-4">@{request.userName}</p>
+            <Link to={`/profile/${member}`}>
+              <p className="text-white text-5xl font-semibold leading-[56px] transition ease-in-out duration-150 hover:scale-[1.05] active:scale-100">
+                {request.name}
+              </p>
+            </Link>
+            <Link to={`/profile/${member}`}>
+              <p className="text-white text-md font-normal mb-4 transition ease-in-out duration-150 hover:scale-[1.05] active:scale-100">@{request.userName}</p>
+            </Link>
             <p className="text-white text-4xl font-semibold">
               {request.position} - {request.teamName}
             </p>

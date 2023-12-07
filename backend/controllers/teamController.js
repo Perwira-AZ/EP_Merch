@@ -77,6 +77,36 @@ const getMyTeams = async (req, res) => {
   }
 };
 
+// Get my team
+const getPeopleTeams = async (req, res) => {
+  const { id } = await req.params;
+
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      throw new Error("User doesn't exist");
+    }
+
+    const { team } = await getTeams(id);
+    const { createdTeam } = await team;
+    const { joinedTeam } = await team;
+
+    const getCreatedTeam = await Promise.all(
+      createdTeam.map(async (team_id) => {
+        return await Team.findById(team_id, 'teamName teamCompetition teamLocation teamStart teamEnd teamLogo');
+      })
+    );
+    const getJoinedTeam = await Promise.all(
+      joinedTeam.map(async (team_id) => {
+        return await Team.findById(team_id, 'teamName teamCompetition teamLocation teamStart teamEnd teamLogo');
+      })
+    );
+
+    res.status(200).json({ myTeamCreated: getCreatedTeam, myTeamJoined: getJoinedTeam });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+};
+
 // Create new team
 const createTeam = async (req, res) => {
   const teamLeader = req.user._id;
@@ -162,6 +192,7 @@ const createRequest = async (req, res) => {
   }
 };
 
+//view request
 const viewRequest = async (req, res) => {
   const id = await req.user._id;
   try {
@@ -178,7 +209,7 @@ const viewRequest = async (req, res) => {
       await Promise.all(
         joinRequest.map(async (req) => {
           if (req.status === 'Requesting') {
-            const user = await User.findById(req.member, 'name userName');
+            const user = await User.findById(req.member, 'name userName profilePict');
             const team = await Team.find({ 'teamMember._id': req.position }, { teamName: 1, 'teamMember.$': 1 });
             const item = {
               id: req._id,
@@ -283,6 +314,7 @@ module.exports = {
   searchTeams,
   getTeam,
   getMyTeams,
+  getPeopleTeams,
   createTeam,
   deleteTeam,
   createRequest,

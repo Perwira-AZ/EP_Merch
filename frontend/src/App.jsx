@@ -1,9 +1,10 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { login, getUserLoggedIn, logout } from './utils/fetch';
 import Header from './components/Header';
 import LoginPage from './pages/LoginPage';
 import ProfilePage from './pages/ProfilePage';
+import MyProfilePage from './pages/MyProfilePage';
 import MyTeamPage from './pages/MyTeamPage';
 import JoinRequestPage from './pages/JoinRequestPage';
 import ExploreTeamPage from './pages/ExploreTeamPage';
@@ -19,8 +20,6 @@ function App() {
   const [user, setUser] = React.useState(null);
   const [isLoading, setIsLoading] = React.useState(false);
   const [viewNotif, setViewNotif] = React.useState(false);
-
-  console.log(user);
 
   React.useEffect(() => {
     getUserLoggedIn().then(({ data }) => {
@@ -43,6 +42,7 @@ function App() {
   function onLogout() {
     logout();
     setUser(null);
+    navigator('/login');
   }
 
   function clickNotif() {
@@ -59,7 +59,8 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/login" element={<LoginPage onLogin={onLogin} />} />
-          <Route path="/profile" element={user ? <ProfilePage user={user} /> : <LoginPage onLogin={onLogin} />} />
+          <Route path="/profile/:id" element={user ? <ProfilePage /> : <LoginPage onLogin={onLogin} />} />
+          <Route path="/myprofile" element={user ? <MyProfilePage user={user} /> : <LoginPage onLogin={onLogin} />} />
           <Route path="/myteam" element={user ? <MyTeamPage /> : <LoginPage onLogin={onLogin} />} />
           <Route path="/joinrequest" element={user ? <JoinRequestPage /> : <LoginPage onLogin={onLogin} />} />
           <Route path="/exploreteam" element={<ExploreTeamPage />} />

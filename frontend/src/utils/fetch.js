@@ -19,6 +19,16 @@ async function fetchWithtoken(url, options = {}) {
 }
 
 //User
+async function getProfile(id) {
+  const response = await fetchWithtoken(`${BASE_URL}/user/profile/${id}`);
+  const responseJson = await response.json();
+
+  if (responseJson.error) {
+    return { error: true, data: responseJson.error };
+  }
+  return { error: false, data: responseJson };
+}
+
 async function register({ name, userName, userEmail, password }) {
   const response = await fetch(`${BASE_URL}/user/register`, {
     method: 'POST',
@@ -69,7 +79,6 @@ async function getUserLoggedIn() {
 
 // Update user information including profilePict
 async function updateUser(userInfo) {
-  console.log(userInfo);
   const response = await fetchWithtoken(`${BASE_URL}/user/myProfile`, {
     method: 'PATCH',
     headers: {
@@ -87,6 +96,16 @@ async function updateUser(userInfo) {
 //Team
 async function getMyTeam() {
   const response = await fetchWithtoken(`${BASE_URL}/teams/myTeams`);
+  const responseJson = await response.json();
+
+  if (responseJson.error) {
+    return { error: true, data: null };
+  }
+  return { error: false, data: responseJson };
+}
+
+async function getPeopleTeam(id) {
+  const response = await fetchWithtoken(`${BASE_URL}/teams/teamList/${id}`);
   const responseJson = await response.json();
 
   if (responseJson.error) {
@@ -222,12 +241,14 @@ export {
   getToken,
   searchTeam,
   requestToJoin,
+  getProfile,
   register,
   login,
   logout,
   getUserLoggedIn,
   updateUser,
   getMyTeam,
+  getPeopleTeam,
   getTeamById,
   deleteTeam,
   viewRequests,
