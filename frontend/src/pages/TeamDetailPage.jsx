@@ -60,22 +60,22 @@ function TeamDetailPage() {
           </p>
 
           {/* Rounded Boxes */}
-          <div className="flex justify-between mb-8">
-            <div className="rounded-xl p-4 shadow-md w-[220px] bg-blue-500 mr-4">
+          <div className="flex justify-between mb-8 gap-4">
+            <div className="rounded-xl p-4 shadow-md w-[220px] bg-blue-500">
               <h3 className="text-sm font-semibold text-white text-center">Location</h3>
               <p className="text-xs text-white text-center">
                 {team.teamLocation.city}, {team.teamLocation.province}
               </p>
             </div>
-            <div className="rounded-xl p-4 shadow-md w-[220px] bg-blue-500 mr-4">
+            <div className="rounded-xl p-4 shadow-md w-[220px] bg-blue-500">
               <h3 className="text-sm font-semibold text-white text-center">Start Date</h3>
               <p className="text-xs text-white text-center">{formatDate(team.teamStart)}</p>
             </div>
-            <div className="rounded-xl p-4 shadow-md w-[220px] bg-blue-500 mr-4">
+            <div className="rounded-xl p-4 shadow-md w-[220px] bg-blue-500">
               <h3 className="text-sm font-semibold text-white text-center">End Date</h3>
               <p className="text-xs text-white text-center">{formatDate(team.teamEnd)}</p>
             </div>
-            <div className="rounded-xl p-4 shadow-md w-[220px] bg-blue-500 mr-4">
+            <div className="rounded-xl p-4 shadow-md w-[220px] bg-blue-500">
               <h3 className="text-sm font-semibold text-white text-center">Leader Name</h3>
               <p className="text-xs text-white text-center">{team.teamLeader}</p>
             </div>
@@ -85,7 +85,12 @@ function TeamDetailPage() {
           {/* <MemberList /> */}
           <div className="flex flex-col w-full">
             {team.teamMember.map((member) => (
-              <PositionCardDetail positionName={member.position} detail={member.description} onJoinClick={() => console.log('Join Developer')} />
+              <PositionCardDetail
+                positionName={member.position}
+                detail={member.description}
+                empty={member.member ? false : true}
+                onJoinClick={() => console.log('Join Developer')}
+              />
             ))}
             {/* Add more cards as needed */}
           </div>

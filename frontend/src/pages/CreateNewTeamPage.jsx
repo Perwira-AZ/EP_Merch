@@ -106,7 +106,7 @@ function CreateNewTeamPage() {
     const file = event.target.files[0];
     const reader = new FileReader();
 
-    if (file.size / 1024 / 1024 <= 1) {
+    if (file.size / 1024 <= 500) {
       reader.readAsDataURL(file);
       reader.onloadend = () => {
         setTeamDetail((prevState) => ({
@@ -116,7 +116,7 @@ function CreateNewTeamPage() {
         setTeamLogo(reader.result);
       };
     } else {
-      alert('File size must be less than 1MB');
+      alert('File size must be less than 500kb');
     }
   }
 
