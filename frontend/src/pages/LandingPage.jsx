@@ -18,9 +18,14 @@ const scrollToPlatformFeatures = () => {
 
 const LandingPage = () => {
   return (
-    <div className="bg-gradient-to-b from-cyan-300 to-blue-500 min-h-screen flex flex-col items-center justify-center p-20">
+    <div className="bg-gradient-to-b from-cyan-300 to-blue-500 min-h-screen flex flex-col items-center justify-center p-20 relative">
+      <div className="absolute inset-0 z-0" style={{ top: "-300px" }}>
+        <svg className="w-full" height="1037" viewBox="0 0 1920 1037" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 0H1920V936.66C1920 936.66 1575.56 710.895 960 936.66C344.438 1162.43 0 936.66 0 936.66V0Z" fill="#FAFAFA" />
+        </svg>
+      </div>
       {/* Header Section */}
-      <div className="mt-20">
+      <div className="mt-20 z-10">
         <div className="max-w-6xl flex items-center justify-between">
           <div className="text-indigo-950 text-4xl font-bold font-Poppins leading-tight">
             Create the BEST TEAM <br /> For Your Project
