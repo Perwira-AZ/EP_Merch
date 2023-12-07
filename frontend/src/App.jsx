@@ -55,7 +55,7 @@ function App() {
         <Route path="/exploreteam" element={<ExploreTeamPage />} />
         <Route path="/createnewteam" element={user ? <CreateNewTeamPage /> : <LoginPage onLogin={onLogin} />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/teamdetail" element={<TeamDetailPage />} />
+        <Route path="/team/:id" element={<TeamDetailPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>
