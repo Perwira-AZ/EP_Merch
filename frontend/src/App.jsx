@@ -10,6 +10,7 @@ import NotificationBar from "./components/NotificationBar";
 import CreateNewTeamPage from "./pages/CreateNewTeamPage";
 import RegisterPage from "./pages/RegisterPage";
 import TeamDetailPage from "./pages/TeamDetailPage";
+import NotFoundPage from "./pages/404";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -56,6 +57,7 @@ function App() {
         <Route path="/createnewteam" element={user ? <CreateNewTeamPage /> : <LoginPage onLogin={onLogin} />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/teamdetail" element={<TeamDetailPage />} />
+        <Route path="/404" element={<NotFoundPage />} />
       </Routes>
     </div>
   );
