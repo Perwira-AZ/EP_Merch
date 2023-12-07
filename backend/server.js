@@ -1,6 +1,7 @@
 require('dotenv').config();
 
 const express = require('express');
+const cors = require('cors');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const http = require('http');
@@ -13,6 +14,7 @@ const app = express();
 
 // middleware
 app.use(express.json());
+app.use(cors({ origin: 'https://team-up-paw.vercel.app' }));
 
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(bodyParser.urlencoded({ extended: true, limit: '10mb', parameterLimit: 50000 }));

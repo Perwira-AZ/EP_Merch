@@ -1,4 +1,4 @@
-const BASE_URL = '/api';
+const BASE_URL = 'https://fair-gray-hare-gown.cyclic.app/api/';
 
 function getToken() {
   return localStorage.getItem('token');
