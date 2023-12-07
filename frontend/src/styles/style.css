@@ -51,6 +51,28 @@ input {
   margin-bottom: 10px;
 }
 
+@keyframes swipeLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-40px);
+    opacity: 0;
+  }
+}
+
+@keyframes swipeRight {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+}
+
 button {
   background-color: #2483f0;
   color: white;
@@ -77,7 +99,7 @@ html {
 .animate-on-scroll {
   opacity: 0;
   transform: translateY(-50px);
-  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
 
 .animate-on-scroll.fade-in {
@@ -88,7 +110,7 @@ html {
 .animate-on-scroll-pop {
   opacity: 0;
   transform: scale(0.5);
-  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
 
 .animate-on-scroll-pop.pop {
@@ -99,7 +121,7 @@ html {
 .animate-on-scroll-left {
   opacity: 0;
   transform: translateX(-200px);
-  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
 
 .animate-on-scroll-left.slide-in-left {
@@ -110,7 +132,7 @@ html {
 .animate-on-scroll-right {
   opacity: 0;
   transform: translateX(200px);
-  transition: opacity 1.5s ease-in-out, transform 1.5s ease-in-out;
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 }
 
 .animate-on-scroll-right.slide-in-right {
@@ -129,4 +151,12 @@ html {
 .custom-button-next:hover {
   transition-duration: 0.5s;
   transform: scale(1.1);
+}
+
+.swipe-left {
+  animation: swipeLeft 0.5s ease-in-out forwards;
+}
+
+.swipe-right {
+  animation: swipeRight 0.5s ease-in-out forwards;
 }
