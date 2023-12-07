@@ -57,10 +57,10 @@ const updateUser = async (req, res) => {
 
 // Register user
 const registerUser = async (req, res) => {
-  const { name, userName, userEmail, password, profilePict } = req.body;
+  const { name, userName, userEmail, password } = req.body;
 
   try {
-    const user = await User.register(name, userName, userEmail, password, profilePict);
+    const user = await User.register(name, userName, userEmail, password);
     if (!user) {
       throw new Error('Failed to create user');
     }

@@ -1,10 +1,9 @@
 import React from 'react';
-import defaultProfile from '../assets/profile.png';
 import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../utils/fetch';
 
 function RegisterPage() {
-  const [user, setUser] = React.useState({ profilePict: '' });
+  const [user, setUser] = React.useState(null);
   const [confirmPassword, setConfirmPassword] = React.useState();
 
   const navigate = useNavigate();
@@ -14,6 +13,7 @@ function RegisterPage() {
       ...prevState,
       name: event.target.value,
     }));
+    console.log(user);
   }
 
   function onUsernameChange(event) {

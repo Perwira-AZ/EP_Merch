@@ -19,13 +19,13 @@ async function fetchWithtoken(url, options = {}) {
 }
 
 //User
-async function register({ name, userName, userEmail, password, profilePict }) {
+async function register({ name, userName, userEmail, password }) {
   const response = await fetch(`${BASE_URL}/user/register`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ name, userName, userEmail, password, profilePict }),
+    body: JSON.stringify({ name, userName, userEmail, password }),
   });
   const responseJson = await response.json();
 
