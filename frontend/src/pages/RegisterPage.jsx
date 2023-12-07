@@ -1,8 +1,40 @@
-import React from 'react';
+import React, { useEffect } from "react";
 import { useNavigate, Link } from 'react-router-dom';
 import { register } from '../utils/fetch';
 
 function RegisterPage() {
+  useEffect(() => {
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.3,
+    };
+  
+    const handleIntersect = (entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          if (entry.target.classList.contains("animate-on-scroll-left")) {
+            entry.target.classList.add("slide-in-left");
+          } else if (entry.target.classList.contains("animate-on-scroll-right")) {
+            entry.target.classList.add("slide-in-right");
+          } else if (entry.target.classList.contains("animate-on-scroll")) {
+            entry.target.classList.add("fade-in");
+          } else if (entry.target.classList.contains("animate-on-scroll-pop")) {
+            entry.target.classList.add("pop");
+          }
+          observer.unobserve(entry.target);
+        }
+      });
+    };
+  
+    const observer = new IntersectionObserver(handleIntersect, options);
+    const elements = document.querySelectorAll(".animate-on-scroll-left, .animate-on-scroll-right, .animate-on-scroll, .animate-on-scroll-pop");
+  
+    elements.forEach((element) => observer.observe(element));
+  
+    return () => observer.disconnect();
+  }, []);
+
   const [user, setUser] = React.useState(null);
   const [confirmPassword, setConfirmPassword] = React.useState();
 
@@ -64,7 +96,7 @@ function RegisterPage() {
   return (
     <div className="bg-[#f1f8ff] flex flex-row justify-center w-full pt-[120px]">
       <div className="flex items-center justify-center w-[870px] h-[1002px] top-[146px] left-[525px] rounded-[30px] shadow-[0px_4px_4px_#00000040] [background:linear-gradient(180deg,rgb(36,131,240)_0%,rgb(112,229,255)_87.12%)] flex">
-        <div className="w-[578px] h-[700px] top-[117px] left-[143px] bg-[#f1f8ff] rounded-[30px] shadow-[0px_2.46px_2.46px_#00000040]">
+        <div className="w-[578px] h-[700px] top-[117px] left-[143px] bg-[#f1f8ff] rounded-[30px] shadow-[0px_2.46px_2.46px_#00000040]  animate-on-scroll">
           {/* Register Form */}
           <div className="flex flex-col items-center justify-center h-full">
             <div className="text-indigo-950 text-xl font-bold font-['Poppins'] leading-[21.06px]">
