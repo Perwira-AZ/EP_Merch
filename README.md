@@ -23,7 +23,6 @@ TeamUp is a Web based application that can help users to create and find a great
 [Web Application link in Vercel](https://team-up-paw.vercel.app/) <br>
 [Presentation Video](https://youtu.be/pWndVrUmbUM) <br>
 [Presentation Slide](https://www.canva.com/design/DAFvjNEOXbw/w4OOE8crnTyhCfgRLK9CeQ/edit) <br>
-[Postman Documentation](https://youtu.be/pWndVrUmbUM) <br>
 
 ## 📘Use Case Diagram
 ![paw-teamup-use-case drawio](https://github.com/Perwira-AZ/TeamUP/assets/92919810/dd6cbca3-e98d-40dd-b832-61ea39253f55)
